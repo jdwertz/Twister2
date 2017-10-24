@@ -1,10 +1,13 @@
 package com.zybooks.thebanddatabase;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import java.util.zip.Inflater;
 
 public class ListActivity extends AppCompatActivity implements ListFragment.OnBandSelectedListener {
 
@@ -17,6 +20,9 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnBa
         setContentView(R.layout.activity_list);
 
         mBandId = -1;
+
+        DataFetcher dataFetcher = new DataFetcher();
+        dataFetcher.getData(this);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.list_fragment_container);

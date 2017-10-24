@@ -29,7 +29,7 @@ public class DetailsFragment extends Fragment {
             bandId = getArguments().getInt("bandId");
         }
 
-        mTwist = TwistDatabase.get(getContext()).getBand(bandId);
+        //mTwist = TwistDatabase.get(getContext()).getBand(bandId);
     }
 
     @Override

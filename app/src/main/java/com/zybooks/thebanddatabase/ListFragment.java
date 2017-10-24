@@ -30,9 +30,11 @@ public class ListFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.band_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        DataFetcher dataFetcher = new DataFetcher();
+
         // Send bands to recycler view
-        BandAdapter adapter = new BandAdapter(TwistDatabase.get(getContext()).getBands());
-        recyclerView.setAdapter(adapter);
+        /*BandAdapter adapter = new BandAdapter(TwistDatabase.get(getContext()).getBands());
+        recyclerView.setAdapter(adapter);*/
 
         return view;
     }
@@ -55,7 +57,7 @@ public class ListFragment extends Fragment {
         public void bind(Twist twist) {
             mTwist = twist;
             mNameTextView.setText(mTwist.getName());
-            mGenreTextView.setText(mTwist.getGenre());
+            //mGenreTextView.setText(mTwist.getGenre());
         }
 
         @Override
