@@ -10,14 +10,14 @@
         android:id="@+id/bandName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/bandName"
+        style="@style/twistUser"
         android:text="twist name"/>
 
     <TextView
         android:id="@+id/bandDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/bandDescription"
+        style="@style/twistText"
         android:text="description"/>
 
 </LinearLayout>

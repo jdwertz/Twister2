@@ -7,17 +7,17 @@
         <item name="android:buttonStyle">@style/buttonStyle</item>
     </style>
 
-    <style name="bandListName">
+    <style name="twistUserList">
         <item name="android:textSize">@dimen/list_text_size</item>
         <item name="android:padding">@dimen/list_padding</item>
     </style>
 
     <style name="bandGenre">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">10sp</item>
         <item name="android:paddingLeft">@dimen/list_padding</item>
     </style>
 
-    <style name="bandName">
+    <style name="twistUser">
         <item name="android:textSize">@dimen/detail_band_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:paddingLeft">@dimen/detail_padding</item>
@@ -25,7 +25,7 @@
         <item name="android:paddingTop">@dimen/detail_padding</item>
     </style>
 
-    <style name="bandDescription">
+    <style name="twistText">
         <item name="android:textSize">@dimen/detail_description_text_size</item>
         <item name="android:paddingLeft">@dimen/detail_padding</item>
         <item name="android:paddingRight">@dimen/detail_padding</item>

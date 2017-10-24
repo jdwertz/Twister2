@@ -21,7 +21,7 @@ public class TwistDatabase {
     private TwistDatabase(Context context) {
         mTwists = new ArrayList<>();
         Resources res = context.getResources();
-        String[] bands = res.getStringArray(R.array.bands);
+        String[] bands = res.getStringArray(R.array.twists);
         String[] descriptions = res.getStringArray(R.array.descriptions);
         String[] genres = res.getStringArray(R.array.genre);
         for (int i = 0; i < bands.length; i++) {

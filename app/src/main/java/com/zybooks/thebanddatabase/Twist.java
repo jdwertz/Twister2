@@ -1,10 +1,13 @@
 package com.zybooks.thebanddatabase;
 
+import java.net.URI;
+
 public class Twist {
     private int mId;
     private String mName;
     private String mDescription;
-    private String mGenre;  // add getter and setter
+    private String mTimeAgo;
+    private URI mProfilePicture;// add getter and setter
 
     public Twist() {}
 
@@ -12,7 +15,7 @@ public class Twist {
         mId = id;
         mName = name;
         mDescription = description;
-        mGenre = genre;
+        mTimeAgo = genre;
     }
 
     public int getId() {
@@ -39,11 +42,19 @@ public class Twist {
         this.mDescription = description;
     }
 
-    public String getGenre() {
-        return mGenre;
+    public String getmTimeAgo() {
+        return mTimeAgo;
     }
 
-    public void setGenre(String genre) {
-        mGenre = genre;
+    public void setmTimeAgo(String mTimeAgo) {
+        this.mTimeAgo = mTimeAgo;
+    }
+
+    public URI getmProfilePicture() {
+        return mProfilePicture;
+    }
+
+    public void setmProfilePicture(URI mProfilePicture) {
+        this.mProfilePicture = mProfilePicture;
     }
 }
