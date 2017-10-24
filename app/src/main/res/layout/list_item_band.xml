@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bandName"
-        android:text="band"
+        android:text="twist"
         style="@style/bandListName">
     </TextView>
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/genre"
-        android:text="band"
+        android:text="twist"
         style="@style/bandGenre">
     </TextView>
 

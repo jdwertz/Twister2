@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">The Band Database</string>
 
-    <string-array name="bands">
+    <string-array name="twists">
         <item>The Beach Boys</item>
         <item>The Beatles</item>
         <item>Bee Gees</item>
@@ -18,19 +18,19 @@
     </string-array>
 
     <string-array name="descriptions">
-        <item>An American rock band that formed in California in 1961.</item>
-        <item>An English rock band that formed in Liverpool in 1960.</item>
+        <item>An American rock twist that formed in California in 1961.</item>
+        <item>An English rock twist that formed in Liverpool in 1960.</item>
         <item>A pop music group that formed in Australia in 1958.</item>
-        <item>An American rock band that formed in New Jersey in 1983.</item>
-        <item>An English electronic band that formed in Essex in 1980.</item>
-        <item>An English new wave and sythpop band that formed in Birmingham in 1978.</item>
-        <item>An English rock band that formed in London in 1968.</item>
-        <item>An Amirican punk rock band that formed in California in 1986.</item>
-        <item>An American rock band that formed in Washington in 1987.</item>
-        <item>An American pop rock band that formed in Colorado in 2002.</item>
-        <item>An English rock band that formed in Oxfordshire in 1985.</item>
-        <item>An American rock band that formed in Georgia in 1980.</item>
-        <item>An Irish rock band from Dublin that formed in 1976.</item>
+        <item>An American rock twist that formed in New Jersey in 1983.</item>
+        <item>An English electronic twist that formed in Essex in 1980.</item>
+        <item>An English new wave and sythpop twist that formed in Birmingham in 1978.</item>
+        <item>An English rock twist that formed in London in 1968.</item>
+        <item>An Amirican punk rock twist that formed in California in 1986.</item>
+        <item>An American rock twist that formed in Washington in 1987.</item>
+        <item>An American pop rock twist that formed in Colorado in 2002.</item>
+        <item>An English rock twist that formed in Oxfordshire in 1985.</item>
+        <item>An American rock twist that formed in Georgia in 1980.</item>
+        <item>An Irish rock twist from Dublin that formed in 1976.</item>
     </string-array>
 
     <string-array name="genre">

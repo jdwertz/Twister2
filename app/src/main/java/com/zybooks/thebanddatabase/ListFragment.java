@@ -1,7 +1,6 @@
 package com.zybooks.thebanddatabase;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,7 +31,7 @@ public class ListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Send bands to recycler view
-        BandAdapter adapter = new BandAdapter(BandDatabase.get(getContext()).getBands());
+        BandAdapter adapter = new BandAdapter(TwistDatabase.get(getContext()).getBands());
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -43,7 +40,7 @@ public class ListFragment extends Fragment {
     private class BandHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
-        private Band mBand;
+        private Twist mTwist;
 
         private TextView mNameTextView;
         private TextView mGenreTextView;
@@ -55,25 +52,25 @@ public class ListFragment extends Fragment {
             mGenreTextView = (TextView) itemView.findViewById(R.id.genre);
         }
 
-        public void bind(Band band) {
-            mBand = band;
-            mNameTextView.setText(mBand.getName());
-            mGenreTextView.setText(mBand.getGenre());
+        public void bind(Twist twist) {
+            mTwist = twist;
+            mNameTextView.setText(mTwist.getName());
+            mGenreTextView.setText(mTwist.getGenre());
         }
 
         @Override
         public void onClick(View view) {
             // Tell ListActivity what band was clicked
-            mListener.onBandSelected(mBand.getId());
+            mListener.onBandSelected(mTwist.getId());
         }
     }
 
     private class BandAdapter extends RecyclerView.Adapter<BandHolder> {
 
-        private List<Band> mBands;
+        private List<Twist> mTwists;
 
-        public BandAdapter(List<Band> bands) {
-            mBands = bands;
+        public BandAdapter(List<Twist> twists) {
+            mTwists = twists;
         }
 
         @Override
@@ -84,13 +81,13 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(BandHolder holder, int position) {
-            Band band = mBands.get(position);
-            holder.bind(band);
+            Twist twist = mTwists.get(position);
+            holder.bind(twist);
         }
 
         @Override
         public int getItemCount() {
-            return mBands.size();
+            return mTwists.size();
         }
     }
 

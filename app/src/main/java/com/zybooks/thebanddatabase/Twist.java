@@ -1,14 +1,14 @@
 package com.zybooks.thebanddatabase;
 
-public class Band {
+public class Twist {
     private int mId;
     private String mName;
     private String mDescription;
     private String mGenre;  // add getter and setter
 
-    public Band() {}
+    public Twist() {}
 
-    public Band(int id, String name, String description, String genre) {
+    public Twist(int id, String name, String description, String genre) {
         mId = id;
         mName = name;
         mDescription = description;
