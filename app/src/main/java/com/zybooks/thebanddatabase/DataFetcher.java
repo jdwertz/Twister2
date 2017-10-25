@@ -26,7 +26,7 @@ public class DataFetcher {
 
     private Context mContext;
 
-    public void getData(Context context /*final OnReceivedListener listener*/) {
+    public void getData(Context context, final OnReceivedListener listener) {
         mContext = context;
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(mContext);
@@ -50,7 +50,7 @@ public class DataFetcher {
                                 twist.setName(jsonTwist.getString("username"));
                                 twist.setDescription(jsonTwist.getString("message"));
                                 twist.setmTimeAgo(jsonTwist.getString("timestamp"));
-                                //listener.onWeatherReceived(weather);
+                                listener.onWeatherReceived(weather);
                                 Log.d("Josh", "Username:" + jsonTwist.getString("username"));
                             }
 
@@ -62,7 +62,7 @@ public class DataFetcher {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //listener.onErrorResponse(error);
+                listener.onErrorResponse(error);
             }
         })
         {
@@ -79,5 +79,6 @@ public class DataFetcher {
 
         // Add the request to the RequestQueue
         queue.add(jsonRequest);
+        Log.d("Josh", "Request added to queue");
     }
 }
