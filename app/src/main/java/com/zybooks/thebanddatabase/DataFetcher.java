@@ -31,13 +31,12 @@ public class DataFetcher {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(mContext);
         String url = "https://jsonstub.com/  ";
+        Log.d("Josh", "entered getData");
 
         // Request a string response from the provided URL
         final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url,
                 null,
                 new Response.Listener<JSONObject>() {
-
-
                     @Override
                     public void onResponse(JSONObject response) {
 
@@ -73,7 +72,7 @@ public class DataFetcher {
                 params.put("Content-Type", "application/json");
                 params.put("JsonStub-User-Key", "edbc267a‐f880‐4dec‐8dec‐727cccc27e5d");
                 params.put("JsonStub-Project-Key", "40e26003‐fc1b‐40f3‐9ae4‐bfab71e6d186");
-
+                Log.d("Josh", "Headers added");
                 return params;
             }
         };
