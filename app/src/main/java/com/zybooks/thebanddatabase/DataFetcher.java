@@ -26,12 +26,11 @@ public class DataFetcher {
 
     private Context mContext;
 
-    public void getData(Context context, final OnReceivedListener listener) {
+    public void getData(Context context, String HttpExtension/*, final OnReceivedListener listener*/) {
         mContext = context;
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(mContext);
-        String url = "https://jsonstub.com/  ";
-        Log.d("Josh", "entered getData");
+        String url = "http://jsonstub.com" + HttpExtension;
 
         // Request a string response from the provided URL
         final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url,
@@ -39,7 +38,6 @@ public class DataFetcher {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
                         try {
                             Log.d("Josh", "Log");
                             JSONArray jsonTwistArray = response.getJSONArray("twists");
@@ -50,7 +48,7 @@ public class DataFetcher {
                                 twist.setName(jsonTwist.getString("username"));
                                 twist.setDescription(jsonTwist.getString("message"));
                                 twist.setmTimeAgo(jsonTwist.getString("timestamp"));
-                                listener.onWeatherReceived(weather);
+                                //listener.onWeatherReceived(weather);
                                 Log.d("Josh", "Username:" + jsonTwist.getString("username"));
                             }
 
@@ -62,7 +60,8 @@ public class DataFetcher {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onErrorResponse(error);
+                //listener.onErrorResponse(error);
+                Log.d("Josh", error.toString());
             }
         })
         {
@@ -70,8 +69,8 @@ public class DataFetcher {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
-                params.put("JsonStub-User-Key", "edbc267a‐f880‐4dec‐8dec‐727cccc27e5d");
-                params.put("JsonStub-Project-Key", "40e26003‐fc1b‐40f3‐9ae4‐bfab71e6d186");
+                params.put("JsonStub-User-Key", "edbc267a-f880-4dec-8dec-727cccc27e5d");
+                params.put("JsonStub-Project-Key", "40e26003-fc1b-40f3-9ae4-bfab71e6d186");
                 Log.d("Josh", "Headers added");
                 return params;
             }

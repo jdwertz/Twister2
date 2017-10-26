@@ -22,7 +22,7 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnBa
         mBandId = -1;
 
         DataFetcher dataFetcher = new DataFetcher();
-        dataFetcher.getData(this);
+        dataFetcher.getData(this, "/twist/");
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.list_fragment_container);
