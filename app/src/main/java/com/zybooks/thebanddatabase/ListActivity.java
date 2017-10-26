@@ -6,13 +6,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+
+import java.util.ArrayList;
 import java.util.zip.Inflater;
 
 public class ListActivity extends AppCompatActivity implements ListFragment.OnBandSelectedListener {
 
     private static String KEY_BAND_ID = "bandId";
     private int mBandId;
+    private ArrayList<Twist> mTwists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +27,19 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnBa
 
         mBandId = -1;
 
-        DataFetcher dataFetcher = new DataFetcher();
-        dataFetcher.getData(this, "/twist/");
+        DataFetcher fetcher = new DataFetcher(this);
+        fetcher.getData("/twist/", new DataFetcher.OnTwistsReceivedListener() {
+            @Override
+            public void onTwistsReceived(ArrayList<Twist> twists) {
+                mTwists = twists;
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Josh", error.toString());
+            }
+        });
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.list_fragment_container);
@@ -44,6 +61,9 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnBa
                     .commit();
         }
     }
+
+
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
