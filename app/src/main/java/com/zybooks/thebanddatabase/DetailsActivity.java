@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    public static String EXTRA_BAND_ID = "bandId";
+    public static String EXTRA_TWIST_ID = "twistId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         if (fragment == null) {
             // Use band ID from ListFragment to instantiate DetailsFragment
-            int bandId = getIntent().getIntExtra(EXTRA_BAND_ID, 1);
-            fragment = DetailsFragment.newInstance(bandId);
+            int twistId = getIntent().getIntExtra(EXTRA_TWIST_ID, 1);
+            fragment = DetailsFragment.newInstance(twistId);
             fragmentManager.beginTransaction()
                     .add(R.id.details_fragment_container, fragment)
                     .commit();

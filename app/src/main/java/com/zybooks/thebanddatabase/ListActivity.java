@@ -1,23 +1,20 @@
 package com.zybooks.thebanddatabase;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
-public class ListActivity extends AppCompatActivity implements ListFragment.OnBandSelectedListener {
+public class ListActivity extends AppCompatActivity implements ListFragment.OnTwistSelectedListener {
 
-    private static String KEY_BAND_ID = "bandId";
-    private int mBandId;
+    private static String KEY_TWIST_ID = "twistId";
+    private int mTwistId;
     private ArrayList<Twist> mTwists;
 
     @Override
@@ -25,20 +22,9 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnBa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        mBandId = -1;
+        mTwistId = -1;
 
-        DataFetcher fetcher = new DataFetcher(this);
-        fetcher.getData("/twist/", new DataFetcher.OnTwistsReceivedListener() {
-            @Override
-            public void onTwistsReceived(ArrayList<Twist> twists) {
-                mTwists = twists;
-            }
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Josh", error.toString());
-            }
-        });
 
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -52,12 +38,12 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnBa
         }
 
         // Replace DetailsFragment if state saved when going from portrait to landscape
-        if (savedInstanceState != null && savedInstanceState.getInt(KEY_BAND_ID) != 0
+        if (savedInstanceState != null && savedInstanceState.getInt(KEY_TWIST_ID) != 0
                 && getResources().getBoolean(R.bool.twoPanes)) {
-            mBandId = savedInstanceState.getInt(KEY_BAND_ID);
-            Fragment bandFragment = DetailsFragment.newInstance(mBandId);
+            mTwistId = savedInstanceState.getInt(KEY_TWIST_ID);
+            Fragment twistFragment = DetailsFragment.newInstance(mTwistId);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.details_fragment_container, bandFragment)
+                    .replace(R.id.details_fragment_container, twistFragment)
                     .commit();
         }
     }
@@ -70,26 +56,26 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnBa
         super.onSaveInstanceState(savedInstanceState);
 
         // Save state when something is selected
-        if (mBandId != -1) {
-            savedInstanceState.putInt(KEY_BAND_ID, mBandId);
+        if (mTwistId != -1) {
+            savedInstanceState.putInt(KEY_TWIST_ID, mTwistId);
         }
     }
 
     @Override
-    public void onBandSelected(int bandId) {
+    public void onTwistSelected(int twistId) {
 
-        mBandId = bandId;
+        mTwistId = twistId;
 
         if (findViewById(R.id.details_fragment_container) == null) {
             // Must be in portrait, so start activity
             Intent intent = new Intent(this, DetailsActivity.class);
-            intent.putExtra(DetailsActivity.EXTRA_BAND_ID, bandId);
+            intent.putExtra(DetailsActivity.EXTRA_TWIST_ID, twistId);
             startActivity(intent);
         } else {
             // Replace previous fragment (if one exists) with a new fragment
-            Fragment bandFragment = DetailsFragment.newInstance(bandId);
+            Fragment twistFragment = DetailsFragment.newInstance(twistId);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.details_fragment_container, bandFragment)
+                    .replace(R.id.details_fragment_container, twistFragment)
                     .commit();
         }
     }

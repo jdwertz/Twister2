@@ -15,12 +15,12 @@ import java.util.List;
 public class ListFragment extends Fragment {
 
     // For the activity to implement
-    public interface OnBandSelectedListener {
-        void onBandSelected(int bandId);
+    public interface OnTwistSelectedListener {
+        void onTwistSelected(int bandId);
     }
 
     // Reference to the activity
-    private OnBandSelectedListener mListener;
+    private OnTwistSelectedListener mListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -32,13 +32,13 @@ public class ListFragment extends Fragment {
 
 
         //Send bands to recycler view
-        //TwistAdapter adapter = new TwistAdapter(BandDatabase.get(getContext()).getBands());
-        //recyclerView.setAdapter(adapter);
+        TwistAdapter adapter = new TwistAdapter(TwistDatabase.get(getContext()).getTwists());
+        recyclerView.setAdapter(adapter);
 
         return view;
     }
 
-    private class BandHolder extends RecyclerView.ViewHolder
+    private class TwistHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         private Twist mTwist;
@@ -46,7 +46,7 @@ public class ListFragment extends Fragment {
         private TextView mNameTextView;
         private TextView mGenreTextView;
 
-        public BandHolder(LayoutInflater inflater, ViewGroup parent) {
+        public TwistHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_band, parent, false));
             itemView.setOnClickListener(this);
             mNameTextView = (TextView) itemView.findViewById(R.id.bandName);
@@ -62,11 +62,11 @@ public class ListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             // Tell ListActivity what band was clicked
-            mListener.onBandSelected(mTwist.getId());
+            mListener.onTwistSelected(mTwist.getId());
         }
     }
 
-    private class TwistAdapter extends RecyclerView.Adapter<BandHolder> {
+    private class TwistAdapter extends RecyclerView.Adapter<TwistHolder> {
 
         private List<Twist> mTwists;
 
@@ -75,13 +75,13 @@ public class ListFragment extends Fragment {
         }
 
         @Override
-        public BandHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public TwistHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            return new BandHolder(layoutInflater, parent);
+            return new TwistHolder(layoutInflater, parent);
         }
 
         @Override
-        public void onBindViewHolder(BandHolder holder, int position) {
+        public void onBindViewHolder(TwistHolder holder, int position) {
             Twist twist = mTwists.get(position);
             holder.bind(twist);
         }
@@ -95,11 +95,11 @@ public class ListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnBandSelectedListener) {
-            mListener = (OnBandSelectedListener) context;
+        if (context instanceof OnTwistSelectedListener) {
+            mListener = (OnTwistSelectedListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnBandSelectedListener");
+                    + " must implement OnTwistSelectedListener");
         }
     }
 
@@ -113,8 +113,8 @@ public class ListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             // Notify activity of band selection
-            String bandId = (String) view.getTag();
-            mListener.onBandSelected(Integer.parseInt(bandId));
+            String twistId = (String) view.getTag();
+            mListener.onTwistSelected(Integer.parseInt(twistId));
         }
     };
 }

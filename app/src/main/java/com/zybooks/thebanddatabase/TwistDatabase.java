@@ -1,16 +1,14 @@
-/*
 package com.zybooks.thebanddatabase;
 
 import android.content.Context;
-import android.content.res.Resources;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TwistDatabase {
 
     private static TwistDatabase sTwistDatabase;
-    private List<Twist> mTwists;
+    private ArrayList<Twist> mTwists;
+    private TwistDatabaseHelper mDbHelper;
 
     public static TwistDatabase get(Context context) {
         if (sTwistDatabase == null) {
@@ -20,27 +18,32 @@ public class TwistDatabase {
     }
 
     private TwistDatabase(Context context) {
-        mTwists = new ArrayList<>();
-        Resources res = context.getResources();
-        String[] bands = res.getStringArray(R.array.twists);
-        String[] descriptions = res.getStringArray(R.array.descriptions);
-        String[] genres = res.getStringArray(R.array.genre);
-        for (int i = 0; i < bands.length; i++) {
-            mTwists.add(new Twist(i + 1, bands[i], descriptions[i], genres[i]));
-        }
+        mDbHelper = new TwistDatabaseHelper(context, mTwists);
+
     }
 
-    public List<Twist> getBands() {
+    public void setTwists(ArrayList<Twist> twists){
+        mTwists = twists;
+    }
+
+    public ArrayList<Twist> getTwists() {
+        if (mTwists == null) {
+            // Call db helper to load bands
+            mTwists = mDbHelper.getTwist();
+        }
         return mTwists;
     }
 
-    public Twist getBand(int bandId) {
+    public Twist getTwist(int twistId) {
         for (Twist twist : mTwists) {
-            if (twist.getId() == bandId) {
+            if (twist.getId() == twistId) {
                 return twist;
             }
         }
         return null;
     }
+
+    public void updateTwist(Twist band) {
+        mDbHelper.updateTwist(band);
+    }
 }
-*/
