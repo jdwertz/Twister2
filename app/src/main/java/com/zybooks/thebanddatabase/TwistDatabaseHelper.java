@@ -40,33 +40,6 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
         mDb.execSQL("create table " + TwistTable.TABLE +
                 " (id integer, " +
                 "name, desc, time real)");
-
-
-        //Resources res = mContext.getResources();
-        /*String[] twists = res.getStringArray(R.array.bands);
-        String[] descriptions = res.getStringArray(R.array.descriptions);*/
-
-        DataFetcher fetcher = new DataFetcher(mContext);
-        fetcher.getData("/twist/", new DataFetcher.OnTwistsReceivedListener() {
-            @Override
-            public void onTwistsReceived(ArrayList<Twist> twists) {
-                mTwists = twists;
-                for (int i = 0; i < mTwists.size(); i++) {
-                    Twist twist = new Twist();
-                    twist.setName(mTwists.get(i).getName());
-                    twist.setDescription(mTwists.get(i).getDescription());
-                    twist.setId(mTwists.get(i).getId());
-                    addTwist(mDb, twist);
-                }
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Josh", error.toString());
-            }
-        });
-
-
     }
 
     @Override
@@ -75,7 +48,7 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void addTwist(SQLiteDatabase db, Twist twist) {
+    public void addTwist(Twist twist) {
         // Insert the twist into bands table
         //SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -83,7 +56,7 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
         values.put(TwistTable.COL_NAME, twist.getName());
         values.put(TwistTable.COL_DESC, twist.getDescription());
         values.put(TwistTable.COL_TIME, twist.getmTimeAgo());
-        db.insert(TwistTable.TABLE, null, values);
+        mDb.insert(TwistTable.TABLE, null, values);
     }
 
     public ArrayList<Twist> getTwists() {
