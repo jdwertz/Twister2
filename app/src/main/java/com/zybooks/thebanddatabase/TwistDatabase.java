@@ -29,7 +29,7 @@ public class TwistDatabase {
     public ArrayList<Twist> getTwists() {
         if (mTwists == null) {
             // Call db helper to load bands
-            mTwists = mDbHelper.getTwist();
+            mTwists = mDbHelper.getTwists();
         }
         return mTwists;
     }

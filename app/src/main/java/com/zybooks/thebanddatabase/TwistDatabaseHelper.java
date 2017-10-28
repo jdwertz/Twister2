@@ -21,13 +21,13 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
 
     private static final class TwistTable {
         private static final String TABLE = "twists";
-        private static final String COL_ID = "_id";
+        private static final String COL_ID = "id";
         private static final String COL_NAME = "name";
         private static final String COL_DESC = "desc";
         private static final String COL_TIME = "time";
     }
 
-    public TwistDatabaseHelper(Context context, ArrayList<Twist> twists) {
+    public TwistDatabaseHelper (Context context, ArrayList<Twist> twists) {
         super(context, "twists.db", null, 2);
         mContext = context;
         mTwists = twists;
@@ -35,9 +35,10 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        Log.d("Josh2", "Is on create being called?");
         mDb = sqLiteDatabase;
         mDb.execSQL("create table " + TwistTable.TABLE +
-                " (_id integer primary key autoincrement, " +
+                " (id integer, " +
                 "name, desc, time real)");
 
 
@@ -54,6 +55,7 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
                     Twist twist = new Twist();
                     twist.setName(mTwists.get(i).getName());
                     twist.setDescription(mTwists.get(i).getDescription());
+                    twist.setId(mTwists.get(i).getId());
                     addTwist(mDb, twist);
                 }
             }
@@ -77,13 +79,14 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
         // Insert the twist into bands table
         //SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(TwistTable.COL_ID, twist.getId());
         values.put(TwistTable.COL_NAME, twist.getName());
         values.put(TwistTable.COL_DESC, twist.getDescription());
-        /*values.put(BandTable.COL_RATING, twist.getRating());*/
+        values.put(TwistTable.COL_TIME, twist.getmTimeAgo());
         db.insert(TwistTable.TABLE, null, values);
     }
 
-    public ArrayList<Twist> getTwist() {
+    public ArrayList<Twist> getTwists() {
 
         ArrayList<Twist> twists = new ArrayList<>();
 
@@ -99,6 +102,7 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
                 twist.setId(cursor.getInt(0));
                 twist.setName(cursor.getString(1));
                 twist.setDescription(cursor.getString(2));
+                twist.setmTimeAgo(cursor.getString(3));
                 //twist.setRating(cursor.getFloat(3));
                 twists.add(twist);
             } while (cursor.moveToNext());
@@ -117,9 +121,10 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
 
     private ContentValues buildValues(Twist twist) {
         ContentValues values = new ContentValues();
+        values.put(TwistTable.COL_ID, twist.getId());
         values.put(TwistTable.COL_NAME, twist.getName());
         values.put(TwistTable.COL_DESC, twist.getDescription());
-        /*values.put(BandTable.COL_RATING, twist.getRating());*/
+        values.put(TwistTable.COL_TIME, twist.getmTimeAgo());
         return values;
     }
 }

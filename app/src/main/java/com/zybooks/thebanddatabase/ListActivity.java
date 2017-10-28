@@ -63,10 +63,11 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
 
     @Override
     public void onTwistSelected(int twistId) {
-
+        Log.d("Josh", "onTwistSelected (ListActivity)");
         mTwistId = twistId;
 
         if (findViewById(R.id.details_fragment_container) == null) {
+            Log.d("Josh", "?");
             // Must be in portrait, so start activity
             Intent intent = new Intent(this, DetailsActivity.class);
             intent.putExtra(DetailsActivity.EXTRA_TWIST_ID, twistId);

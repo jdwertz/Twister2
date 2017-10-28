@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ public class ListFragment extends Fragment {
 
     // For the activity to implement
     public interface OnTwistSelectedListener {
-        void onTwistSelected(int bandId);
+        void onTwistSelected(int twistId);
     }
 
     // Reference to the activity
@@ -44,24 +45,27 @@ public class ListFragment extends Fragment {
         private Twist mTwist;
 
         private TextView mNameTextView;
-        private TextView mGenreTextView;
+        private TextView mTwistTextView;
 
         public TwistHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_band, parent, false));
             itemView.setOnClickListener(this);
             mNameTextView = (TextView) itemView.findViewById(R.id.bandName);
-            mGenreTextView = (TextView) itemView.findViewById(R.id.genre);
+            mTwistTextView = (TextView) itemView.findViewById(R.id.genre);
         }
 
         public void bind(Twist twist) {
             mTwist = twist;
             mNameTextView.setText(mTwist.getName());
+            mTwistTextView.setText(mTwist.getDescription());
             //mGenreTextView.setText(mTwist.getGenre());
+            Log.d("Josh", "End of bind(Twist)");
         }
 
         @Override
         public void onClick(View view) {
             // Tell ListActivity what band was clicked
+            //String whatever = mTwist.getDescription();
             mListener.onTwistSelected(mTwist.getId());
         }
     }
@@ -83,6 +87,9 @@ public class ListFragment extends Fragment {
         @Override
         public void onBindViewHolder(TwistHolder holder, int position) {
             Twist twist = mTwists.get(position);
+
+            Log.d("Josh", "ID: " + Integer.toString(twist.getId()));
+
             holder.bind(twist);
         }
 

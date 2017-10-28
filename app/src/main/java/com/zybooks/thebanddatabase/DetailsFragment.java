@@ -2,6 +2,7 @@ package com.zybooks.thebanddatabase;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,12 @@ public class DetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         // Get the band ID from the intent that started DetailsActivity
-        int bandId = 1;
+        int twistId = 1;
         if (getArguments() != null) {
-            bandId = getArguments().getInt("bandId");
+            twistId = getArguments().getInt("twistId");
         }
-
-        //mTwist = TwistDatabase.get(getContext()).getBand(bandId);
+        Log.d("Josh", "twistId" + twistId);
+        mTwist = TwistDatabase.get(getContext()).getTwist(twistId);
     }
 
     @Override
@@ -39,6 +40,7 @@ public class DetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_details, container, false);
 
         TextView nameTextView = (TextView) view.findViewById(R.id.bandName);
+        Log.d("Josh", "I think we crash here?");
         nameTextView.setText(mTwist.getName());
 
         TextView descriptionTextView = (TextView) view.findViewById(R.id.bandDescription);
