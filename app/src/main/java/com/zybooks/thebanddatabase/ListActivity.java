@@ -26,7 +26,6 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
 
 
 
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.list_fragment_container);
 

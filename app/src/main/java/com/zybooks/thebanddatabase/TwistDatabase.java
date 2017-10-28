@@ -30,7 +30,6 @@ public class TwistDatabase {
                 mTwists = twists;
                 for (int i = 0; i < mTwists.size(); i++) {
                     mDbHelper.addTwist(mTwists.get(i));
-
                 }
             }
             @Override
