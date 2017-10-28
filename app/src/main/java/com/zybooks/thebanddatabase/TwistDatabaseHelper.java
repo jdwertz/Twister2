@@ -7,17 +7,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TwistDatabaseHelper extends SQLiteOpenHelper {
+public class TwistDatabaseHelper extends SQLiteOpenHelper{
 
     private Context mContext;
     private ArrayList<Twist> mTwists;
     private SQLiteDatabase mDb;
+
 
     private static final class TwistTable {
         private static final String TABLE = "twists";
@@ -31,6 +33,8 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
         super(context, "twists.db", null, 2);
         mContext = context;
         mTwists = twists;
+
+
     }
 
     @Override
@@ -45,7 +49,7 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
         //Resources res = mContext.getResources();
         /*String[] twists = res.getStringArray(R.array.bands);
         String[] descriptions = res.getStringArray(R.array.descriptions);*/
-
+        Log.d("Josh2", "Creating dataFetcher");
         DataFetcher fetcher = new DataFetcher(mContext);
         fetcher.getData("/twist/", new DataFetcher.OnTwistsReceivedListener() {
             @Override
@@ -57,16 +61,16 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
                     twist.setDescription(mTwists.get(i).getDescription());
                     twist.setId(mTwists.get(i).getId());
                     addTwist(mDb, twist);
+                    Log.d("Josh3", twist.getName());
                 }
             }
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Josh", error.toString());
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_LONG);
             }
         });
-
-
     }
 
     @Override
