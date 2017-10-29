@@ -1,4 +1,4 @@
-package com.zybooks.thebanddatabase;
+package com.zybooks.twister;
 
 import java.net.URI;
 

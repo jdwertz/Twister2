@@ -1,17 +1,13 @@
-package com.zybooks.thebanddatabase;
+package com.zybooks.twister;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.android.volley.VolleyError;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class TwistDatabaseHelper extends SQLiteOpenHelper {
 
