@@ -4,61 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/usernameView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="33dp"
-        android:layout_marginTop="29dp"
+        android:layout_width="278dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="72dp"
         android:text="Username"
-        app:layout_constraintBottom_toTopOf="@+id/inputUsernameText"
-        app:layout_constraintEnd_toEndOf="@+id/passwordView"
-        app:layout_constraintStart_toStartOf="@+id/inputUsernameText"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/passwordView"
-        android:layout_width="0dp"
+        android:layout_width="278dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
         android:text="Password"
-        app:layout_constraintBottom_toTopOf="@+id/inputPasswordText"
-        app:layout_constraintEnd_toEndOf="@+id/inputPasswordText"
-        app:layout_constraintStart_toStartOf="@+id/inputPasswordText"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputUsernameText" />
 
     <EditText
         android:id="@+id/inputUsernameText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="31dp"
-        app:layout_constraintBottom_toTopOf="@+id/passwordView"
-        app:layout_constraintEnd_toEndOf="@+id/inputPasswordText"
-        app:layout_constraintStart_toStartOf="@+id/passwordView"
+        android:layout_width="278dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:onClick="onInputUsernameClicked"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameView" />
 
     <EditText
         android:id="@+id/inputPasswordText"
+        android:layout_width="278dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
         android:inputType="textPassword"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton"
-        app:layout_constraintEnd_toEndOf="@+id/loginButton"
-        app:layout_constraintStart_toStartOf="@+id/loginButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordView" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="278dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="74dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="88dp"
         android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPasswordText" />
 
