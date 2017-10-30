@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,15 +28,21 @@ public class LoginActivity extends AppCompatActivity {
         mTwists = mDb.getTwists();
     }
 
-    protected void onInputUsernameClicked(View view)
-    {
-        mUsername = mInputUsernameText.getText().toString();
-        Log.d("username", mUsername);
-        for (int i = 0; i < mTwists.size(); i ++){
-            if(mUsername.equals(mTwists.get(i).getName())){
-                Intent intent = new Intent(this, ListActivity.class);
-                startActivity(intent);
+    protected void onInputUsernameClicked(View view) {
+        mTwists = mDb.getTwists();
+        if (mTwists.size() == 0){
+            Toast.makeText(this, "No response from API yet", Toast.LENGTH_LONG);
+        }
+        else {
+            mUsername = mInputUsernameText.getText().toString();
+            Log.d("username", mUsername);
+            for (int i = 0; i < mTwists.size(); i++) {
+                if (mUsername.equals(mTwists.get(i).getName())) {
+                    Intent intent = new Intent(this, ListActivity.class);
+                    startActivity(intent);
+                }
             }
+
         }
     }
 }

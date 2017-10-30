@@ -68,7 +68,7 @@ public class ListFragment extends Fragment {
             // Tell ListActivity what band was clicked
             //String whatever = mTwist.getDescription();
             Log.d("Josh", "Twist selected ID= "+ mTwist.getId());
-            mListener.onTwistSelected(/*mTwist.getId()*/ 3);
+            mListener.onTwistSelected(mTwist.getId());
         }
     }
 
@@ -122,7 +122,8 @@ public class ListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             // Notify activity of band selection
-            mListener.onTwistSelected(3);
+            String twistId = (String) view.getTag();
+            mListener.onTwistSelected(Integer.parseInt(twistId));
         }
     };
 }
