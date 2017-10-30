@@ -1,6 +1,8 @@
 package com.zybooks.twister;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.List;
 
 public class ListFragment extends Fragment {
@@ -19,6 +25,7 @@ public class ListFragment extends Fragment {
     public interface OnTwistSelectedListener {
         void onTwistSelected(int twistId);
     }
+
 
     // Reference to the activity
     private OnTwistSelectedListener mListener;
@@ -46,18 +53,22 @@ public class ListFragment extends Fragment {
 
         private TextView mNameTextView;
         private TextView mTwistTextView;
+        private ImageView mProfilePic;
 
         public TwistHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_band, parent, false));
             itemView.setOnClickListener(this);
             mNameTextView = (TextView) itemView.findViewById(R.id.bandName);
             mTwistTextView = (TextView) itemView.findViewById(R.id.genre);
+            mProfilePic = (ImageView) itemView.findViewById(R.id.profilePicture);
         }
 
         public void bind(Twist twist) {
             mTwist = twist;
             mNameTextView.setText(mTwist.getName());
             mTwistTextView.setText(mTwist.getDescription());
+            DownloadImageTask downloadImageTask = new DownloadImageTask(mProfilePic);
+            downloadImageTask.doInBackground("http://cs.harding.edu/fmccown/twister/images/bsmith.jpg");
             //mGenreTextView.setText(mTwist.getGenre());
             Log.d("Josh", "End of bind(Twist)");
         }
