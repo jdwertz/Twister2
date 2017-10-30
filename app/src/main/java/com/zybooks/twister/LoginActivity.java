@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected void onInputUsernameClicked(View view) {
+        boolean userNameFound = false;
         mTwists = mDb.getTwists();
         if (mTwists.size() == 0){
             Toast.makeText(this, "No response from API yet", Toast.LENGTH_LONG);
@@ -36,11 +37,18 @@ public class LoginActivity extends AppCompatActivity {
         else {
             mUsername = mInputUsernameText.getText().toString();
             Log.d("username", mUsername);
-            for (int i = 0; i < mTwists.size(); i++) {
+            for (int i = 0; i < mTwists.size() && !userNameFound; i++) {
                 if (mUsername.equals(mTwists.get(i).getName())) {
+                    userNameFound = true;
                     Intent intent = new Intent(this, ListActivity.class);
                     startActivity(intent);
                 }
+            }
+
+            Log.d("usernameFound", String.valueOf(userNameFound));
+            if(!userNameFound)
+            {
+                Toast.makeText(this, "Account credentials invalid!", Toast.LENGTH_LONG);
             }
 
         }
