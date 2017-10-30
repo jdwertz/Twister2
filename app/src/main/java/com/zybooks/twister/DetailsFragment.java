@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+
 public class DetailsFragment extends Fragment {
 
     private Twist mTwist;
+    private User mUser;
 
     public static DetailsFragment newInstance(int bandId) {
         DetailsFragment fragment = new DetailsFragment();
@@ -46,6 +49,20 @@ public class DetailsFragment extends Fragment {
 
         TextView descriptionTextView = (TextView) view.findViewById(R.id.bandDescription);
         descriptionTextView.setText(mTwist.getDescription());
+
+        UserDataFetcher userFetcher = new UserDataFetcher(getActivity().getApplicationContext());
+        userFetcher.getData("/user/bsmith/", new UserDataFetcher.OnUserReceivedListener() {
+            @Override
+            public void onUserReceived(User user) {
+                mUser = user;
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.toString());
+            }
+        });
+        //descriptionTextView.setText(mUser.getAbout());
 
         return view;
     }

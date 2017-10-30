@@ -16,7 +16,7 @@ public class TwistDatabase {
 
     public static TwistDatabase get(Context context) {
         if (sTwistDatabase == null) {
-            Log.d("TwistDB", "TwistDB instantiated");
+
             sTwistDatabase = new TwistDatabase(context);
         }
         return sTwistDatabase;
@@ -24,6 +24,7 @@ public class TwistDatabase {
 
     private TwistDatabase(Context context) {
         mDbHelper = new TwistDatabaseHelper(context, mTwists);
+
         DataFetcher fetcher = new DataFetcher(context);
         fetcher.getData("/twist/", new DataFetcher.OnTwistsReceivedListener() {
             @Override
