@@ -15,7 +15,7 @@ public class DetailsFragment extends Fragment {
     public static DetailsFragment newInstance(int bandId) {
         DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
-        args.putInt("bandId", bandId);
+        args.putInt("twistId", bandId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -28,6 +28,7 @@ public class DetailsFragment extends Fragment {
         int twistId = 1;
         if (getArguments() != null) {
             twistId = getArguments().getInt("twistId");
+            Log.d("twistID", Integer.toString(twistId));
         }
         Log.d("Josh", "twistId" + twistId);
         mTwist = TwistDatabase.get(getContext()).getTwist(twistId);

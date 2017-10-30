@@ -16,6 +16,7 @@ public class TwistDatabase {
 
     public static TwistDatabase get(Context context) {
         if (sTwistDatabase == null) {
+            Log.d("TwistDB", "TwistDB instantiated");
             sTwistDatabase = new TwistDatabase(context);
         }
         return sTwistDatabase;

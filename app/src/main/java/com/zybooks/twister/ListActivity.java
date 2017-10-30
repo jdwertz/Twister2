@@ -67,11 +67,11 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
             Log.d("Josh", "?");
             // Must be in portrait, so start activity
             Intent intent = new Intent(this, DetailsActivity.class);
-            intent.putExtra(DetailsActivity.EXTRA_TWIST_ID, twistId);
+            intent.putExtra(DetailsActivity.EXTRA_TWIST_ID, 3);
             startActivity(intent);
         } else {
             // Replace previous fragment (if one exists) with a new fragment
-            Fragment twistFragment = DetailsFragment.newInstance(twistId);
+            Fragment twistFragment = DetailsFragment.newInstance(3);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.details_fragment_container, twistFragment)
                     .commit();

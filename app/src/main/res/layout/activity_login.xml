@@ -34,9 +34,11 @@
         android:layout_width="278dp"
         android:layout_height="47dp"
         android:layout_marginStart="8dp"
-        android:onClick="onInputUsernameClicked"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameView" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameView"
+
+
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/inputPasswordText"
@@ -45,7 +47,8 @@
         android:layout_marginStart="8dp"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordView" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordView"
+        android:singleLine="true"/>
 
     <Button
         android:id="@+id/loginButton"
@@ -55,6 +58,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="88dp"
         android:text="Login"
+        android:onClick="onInputUsernameClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPasswordText" />
