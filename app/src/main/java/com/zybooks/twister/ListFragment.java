@@ -67,9 +67,11 @@ public class ListFragment extends Fragment {
             mTwist = twist;
             mNameTextView.setText(mTwist.getName());
             mTwistTextView.setText(mTwist.getDescription());
-            DownloadImageTask downloadImageTask = new DownloadImageTask(mProfilePic);
-            downloadImageTask.doInBackground("http://cs.harding.edu/fmccown/twister/images/bsmith.jpg");
-            //mGenreTextView.setText(mTwist.getGenre());
+            String imageURL = "http://cs.harding.edu/fmccown/twister/images/"
+                    + mTwist.getName() + ".jpg";
+            new DownloadImageTask(mProfilePic)
+                    .execute(imageURL);
+
             Log.d("Josh", "End of bind(Twist)");
         }
 
@@ -138,3 +140,5 @@ public class ListFragment extends Fragment {
         }
     };
 }
+
+
