@@ -1,7 +1,6 @@
 package com.zybooks.twister;
 
 import android.content.Intent;
-import android.preference.EditTextPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean userNameFound = false;
         mTwists = mDb.getTwists();
         if (mTwists.size() == 0){
-            Toast.makeText(this, "No response from API yet", Toast.LENGTH_LONG);
+            Toast.makeText(this, "No response from API yet", Toast.LENGTH_LONG).show();
         }
         else {
             mUsername = mInputUsernameText.getText().toString();
@@ -45,10 +44,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
-            Log.d("usernameFound", String.valueOf(userNameFound));
+
             if(!userNameFound)
             {
-                Toast.makeText(this, "Account credentials invalid!", Toast.LENGTH_LONG);
+                Log.d("usernameFound", String.valueOf(userNameFound));
+                Toast.makeText(this, "Account credentials invalid!", Toast.LENGTH_LONG).show();
             }
 
         }

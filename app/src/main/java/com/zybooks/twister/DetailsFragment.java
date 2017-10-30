@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 
+import java.util.ArrayList;
+
 public class DetailsFragment extends Fragment {
 
     private Twist mTwist;
-    private User mUser;
 
     public static DetailsFragment newInstance(int bandId) {
         DetailsFragment fragment = new DetailsFragment();
@@ -41,28 +42,28 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_details, container, false);
-
-        TextView nameTextView = (TextView) view.findViewById(R.id.bandName);
-        Log.d("Josh", "I think we crash here?");
-        nameTextView.setText(mTwist.getName());
-
-        TextView descriptionTextView = (TextView) view.findViewById(R.id.bandDescription);
-        descriptionTextView.setText(mTwist.getDescription());
-
-        UserDataFetcher userFetcher = new UserDataFetcher(getActivity().getApplicationContext());
-        userFetcher.getData("/user/bsmith/", new UserDataFetcher.OnUserReceivedListener() {
+        /*UserDataFetcher fetcher = new UserDataFetcher(getActivity().getApplicationContext());
+        fetcher.getData("/twist/", new UserDataFetcher.OnUserReceivedListener() {
             @Override
-            public void onUserReceived(User user) {
-                mUser = user;
+            public void onUserReceived(ArrayList<Twist> twists) {
+                mTwists = twists;
+                for (int i = 0; i < mTwists.size(); i++) {
+                    mDbHelper.addTwist(mTwists.get(i));
+                }
             }
-
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.toString());
+                Log.d("Josh", error.toString());
             }
-        });
-        //descriptionTextView.setText(mUser.getAbout());
+        });*/
+
+        View view = inflater.inflate(R.layout.fragment_details, container, false);
+
+        TextView descriptionTextView = (TextView) view.findViewById(R.id.bandDescription);
+        descriptionTextView.setText(DetailsActivity.mUsers.get(0).getAbout());
+
+        TextView nameTextView = (TextView) view.findViewById(R.id.bandName);
+        nameTextView.setText(mTwist.getName());
 
         return view;
     }

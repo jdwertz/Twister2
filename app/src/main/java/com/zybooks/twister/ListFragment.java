@@ -1,8 +1,6 @@
 package com.zybooks.twister;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,9 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class ListFragment extends Fragment {
@@ -54,6 +51,7 @@ public class ListFragment extends Fragment {
         private TextView mNameTextView;
         private TextView mTwistTextView;
         private ImageView mProfilePic;
+        private TextView mTimeAgo;
 
         public TwistHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_band, parent, false));
@@ -61,12 +59,25 @@ public class ListFragment extends Fragment {
             mNameTextView = (TextView) itemView.findViewById(R.id.bandName);
             mTwistTextView = (TextView) itemView.findViewById(R.id.genre);
             mProfilePic = (ImageView) itemView.findViewById(R.id.profilePicture);
+            mTimeAgo = (TextView) itemView.findViewById(R.id.timeAgo);
         }
 
         public void bind(Twist twist) {
             mTwist = twist;
             mNameTextView.setText(mTwist.getName());
             mTwistTextView.setText(mTwist.getDescription());
+
+            String timeAgo = mTwist.getmTimeAgo();
+            //**************************************
+            //Convert timeAgo to "pretty" text.
+            //https://stackoverflow.com/questions/3859288/how-to-calculate-time-ago-in-java  
+
+
+
+
+            //***************************************
+            mTimeAgo.setText(timeAgo);
+
             String imageURL = "http://cs.harding.edu/fmccown/twister/images/"
                     + mTwist.getName() + ".jpg";
             new DownloadImageTask(mProfilePic)

@@ -42,6 +42,20 @@
         >
     </TextView>
 
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/timeAgo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:text="twist"
+        style="@style/bandGenre"
+        >
+    </TextView>
+
+
+
 
 
 </android.support.constraint.ConstraintLayout>

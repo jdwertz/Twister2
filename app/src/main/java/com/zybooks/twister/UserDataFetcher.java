@@ -40,6 +40,7 @@ public class UserDataFetcher {
         RequestQueue queue = Volley.newRequestQueue(mContext);
         String url = "http://jsonstub.com" + HttpExtension;
 
+
         // Request a string response from the provided URL
         final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url,
                 null,
