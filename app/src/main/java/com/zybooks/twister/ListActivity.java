@@ -91,7 +91,7 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
-    }*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,7 +103,7 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
         //MenuItem item = menu.findItem(R.id.addTwist);
         //ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
