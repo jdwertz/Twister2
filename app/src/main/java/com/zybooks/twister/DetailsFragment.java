@@ -28,6 +28,7 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDb = TwistDatabase.get(getContext());
 
         // Get the band ID from the intent that started DetailsActivity
         int twistId = 1;
@@ -36,14 +37,13 @@ public class DetailsFragment extends Fragment {
             Log.d("twistID", Integer.toString(twistId));
         }
         Log.d("Josh", "twistId" + twistId);
-        mTwist = TwistDatabase.get(getContext()).getTwist(twistId);
+        mTwist = mDb.getTwist(twistId);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mDb = TwistDatabase.get(getActivity().getApplicationContext());
 
         View view = inflater.inflate(R.layout.fragment_details, container, false);
 
