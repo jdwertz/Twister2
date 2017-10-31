@@ -88,22 +88,10 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
         }
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }*/
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
-        //getMenuInflater().inflate(R.menu.popup, menu);
-
-        // Locate MenuItem with ShareActionProvider
-        //MenuItem item = menu.findItem(R.id.addTwist);
-        //ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         return true;
     }
 
@@ -113,16 +101,13 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
 
             // User chose action_settings
             case R.id.addTwist:
-                Context context = getApplicationContext();
-                //CharSequence text = "Add twist pressed";
-               // int duration = Toast.LENGTH_SHORT;
-
-               // Toast toast = Toast.makeText(context, text, duration);
-               // toast.show();
-
                 Intent intent = new Intent(this, AddTwistActivity.class);
                 startActivity(intent);
+                return true;
 
+            case R.id.Logout:
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
                 return true;
 
             case R.id.About:
@@ -136,8 +121,6 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
                             }
                         });
                 alertDialog.show();
-
-
                 return true;
 
             default:
@@ -145,31 +128,5 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
-
-        //public boolean onShowPopup(View v) {
-        //PopupMenu popupMenu = new PopupMenu(this, v);
-        //MenuInflater inflater = popupMenu.getMenuInflater();
-        // inflater.inflate(R.menu.popup, popupMenu.getMenu());
-        // popupMenu.show();
-
-
-        //    return true;
-        //}
-
-        //@Override
-        //public boolean onOptionsItemSelected(MenuItem item) {
-        //   switch(item.getItemId()) {
-        //     case R.id.addTwist:
-        //       Intent intent = new Intent(this, AddTwistActivity.class);
-        //          this.startActivity(intent);
-        //         break;
-        //case R.id.menu_item2:
-        // another startActivity, this is for item with id "menu_item2"
-        //    break;
-        //     default:
-        //         return super.onOptionsItemSelected(item);
-        //}
-
-        // return true;
     }
 }
