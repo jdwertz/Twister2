@@ -1,10 +1,12 @@
 package com.zybooks.twister;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -120,6 +122,21 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
 
                 Intent intent = new Intent(this, AddTwistActivity.class);
                 startActivity(intent);
+
+                return true;
+
+            case R.id.About:
+                AlertDialog alertDialog = new AlertDialog.Builder(ListActivity.this).create();
+                alertDialog.setTitle("About");
+                alertDialog.setMessage("Program by Trevor Hale and Josh Wertz");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+
 
                 return true;
 
