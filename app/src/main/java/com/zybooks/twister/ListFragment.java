@@ -12,9 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import org.ocpsoft.prettytime.PrettyTime;
 
 public class ListFragment extends Fragment {
 
@@ -68,15 +69,20 @@ public class ListFragment extends Fragment {
             mTwistTextView.setText(mTwist.getDescription());
 
             String timeAgo = mTwist.getmTimeAgo();
-            //**************************************
-            //Convert timeAgo to "pretty" text.
-            //https://stackoverflow.com/questions/3859288/how-to-calculate-time-ago-in-java  
 
+            try {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date past = format.parse(timeAgo);
 
-
-
-            //***************************************
-            mTimeAgo.setText(timeAgo);
+                PrettyTime prettyTime = new PrettyTime();
+                String formattedTime = prettyTime.format(past);
+                Log.d("prettyTime", formattedTime);
+                mTimeAgo.setText(formattedTime);
+            }
+            catch (Exception j)
+            {
+                j.printStackTrace();
+            }
 
             String imageURL = "http://cs.harding.edu/fmccown/twister/images/"
                     + mTwist.getName() + ".jpg";
