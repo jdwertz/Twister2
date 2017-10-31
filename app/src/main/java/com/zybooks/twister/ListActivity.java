@@ -5,7 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -21,8 +27,6 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
         setContentView(R.layout.activity_list);
 
         mTwistId = -1;
-
-
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.list_fragment_container);
@@ -77,4 +81,22 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
                     .commit();
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    //public boolean onShowPopup(View v) {
+        //PopupMenu popupMenu = new PopupMenu(this, v);
+        //MenuInflater inflater = popupMenu.getMenuInflater();
+       // inflater.inflate(R.menu.popup, popupMenu.getMenu());
+       // popupMenu.show();
+
+
+
+    //    return true;
+    //}
 }

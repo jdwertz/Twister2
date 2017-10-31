@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/addTwist"
+        android:title="Add twist"
+        android:icon="@drawable/add_twist"
+        app:showAsAction="always" />
+
+    <item
+    android:id="@+id/searchTwists"
+    android:title="Search twists"
+    android:icon="@drawable/search_twists"
+    app:showAsAction="always" />
+
+    <item
+        android:id="@+id/overflowMenu"
+        android:title="Overflow menu"
+        android:icon="@drawable/overflow_menu"
+        app:showAsAction="always" />
+
+</menu>
