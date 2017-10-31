@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class DetailsFragment extends Fragment {
 
     private Twist mTwist;
+    private TwistDatabase mDb;
 
     public static DetailsFragment newInstance(int bandId) {
         DetailsFragment fragment = new DetailsFragment();
@@ -42,25 +43,17 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        /*UserDataFetcher fetcher = new UserDataFetcher(getActivity().getApplicationContext());
-        fetcher.getData("/twist/", new UserDataFetcher.OnUserReceivedListener() {
-            @Override
-            public void onUserReceived(ArrayList<Twist> twists) {
-                mTwists = twists;
-                for (int i = 0; i < mTwists.size(); i++) {
-                    mDbHelper.addTwist(mTwists.get(i));
-                }
-            }
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Josh", error.toString());
-            }
-        });*/
+        mDb = TwistDatabase.get(getActivity().getApplicationContext());
 
         View view = inflater.inflate(R.layout.fragment_details, container, false);
 
         TextView descriptionTextView = (TextView) view.findViewById(R.id.bandDescription);
-        descriptionTextView.setText(DetailsActivity.mUsers.get(0).getAbout());
+        String username = mTwist.getName();
+        User user = mDb.getUser(username);
+
+        Log.d("MyError", user.getAbout());
+
+        descriptionTextView.setText(user.getAbout());
 
         TextView nameTextView = (TextView) view.findViewById(R.id.bandName);
         nameTextView.setText(mTwist.getName());

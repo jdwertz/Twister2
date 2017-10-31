@@ -11,6 +11,7 @@ public class TwistDatabase {
 
     private static TwistDatabase sTwistDatabase;
     private ArrayList<Twist> mTwists;
+    private ArrayList<User> mUser;
     private TwistDatabaseHelper mDbHelper;
     private Context mContext;
 
@@ -40,7 +41,18 @@ public class TwistDatabase {
             }
         });
 
-
+        UserDataFetcher userFetcher = new UserDataFetcher(context);
+        userFetcher.getData("/user/bsmith", new UserDataFetcher.OnUserReceivedListener() {
+            @Override
+            public void onUserReceived(User user) {
+                Log.d("UserFetcher reply", "Username: " + user.getUsername() + "About:" + user.getAbout());
+                mUser.add(user);
+            }
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Josh", error.toString());
+            }
+        });
     }
 
     public void setTwists(ArrayList<Twist> twists){
@@ -66,5 +78,15 @@ public class TwistDatabase {
 
     public void updateTwist(Twist band) {
         mDbHelper.updateTwist(band);
+    }
+
+    public User getUser(String username){
+
+        for (int i = 0; i < mUser.size(); i++){
+            if(mUser.get(i).getUsername().equals(username)){
+                return mUser.get(i);
+            }
+        }
+        return null;
     }
 }
