@@ -1,17 +1,21 @@
 package com.zybooks.twister;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,8 +56,6 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
     }
 
 
-
-
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
@@ -91,14 +93,62 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
         return true;
     }*/
 
-    //public boolean onShowPopup(View v) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        //getMenuInflater().inflate(R.menu.popup, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        //MenuItem item = menu.findItem(R.id.addTwist);
+        //ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            // User chose action_settings
+            case R.id.addTwist:
+                Context context = getApplicationContext();
+                CharSequence text = "Add twist pressed";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
+
+        //public boolean onShowPopup(View v) {
         //PopupMenu popupMenu = new PopupMenu(this, v);
         //MenuInflater inflater = popupMenu.getMenuInflater();
-       // inflater.inflate(R.menu.popup, popupMenu.getMenu());
-       // popupMenu.show();
+        // inflater.inflate(R.menu.popup, popupMenu.getMenu());
+        // popupMenu.show();
 
 
+        //    return true;
+        //}
 
-    //    return true;
-    //}
+        //@Override
+        //public boolean onOptionsItemSelected(MenuItem item) {
+        //   switch(item.getItemId()) {
+        //     case R.id.addTwist:
+        //       Intent intent = new Intent(this, AddTwistActivity.class);
+        //          this.startActivity(intent);
+        //         break;
+        //case R.id.menu_item2:
+        // another startActivity, this is for item with id "menu_item2"
+        //    break;
+        //     default:
+        //         return super.onOptionsItemSelected(item);
+        //}
+
+        // return true;
+    }
 }

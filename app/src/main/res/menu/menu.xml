@@ -14,9 +14,9 @@
     app:showAsAction="always" />
 
     <item
-        android:id="@+id/overflowMenu"
-        android:title="Overflow menu"
+        android:id="@+id/Logout"
         android:icon="@drawable/overflow_menu"
-        app:showAsAction="always" />
+        android:title="Logout"
+        app:showAsAction="never" />
 
 </menu>
