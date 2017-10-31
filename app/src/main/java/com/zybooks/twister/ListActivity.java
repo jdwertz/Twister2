@@ -112,11 +112,15 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
             // User chose action_settings
             case R.id.addTwist:
                 Context context = getApplicationContext();
-                CharSequence text = "Add twist pressed";
-                int duration = Toast.LENGTH_SHORT;
+                //CharSequence text = "Add twist pressed";
+               // int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+               // Toast toast = Toast.makeText(context, text, duration);
+               // toast.show();
+
+                Intent intent = new Intent(this, AddTwistActivity.class);
+                startActivity(intent);
+
                 return true;
 
             default:
