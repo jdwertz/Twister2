@@ -10,7 +10,7 @@ import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements DetailsFragment.OnTwistSelectedListener {
 
     public static String EXTRA_TWIST_ID = "twistId";
     public static ArrayList<User> mUsers;
@@ -53,5 +53,10 @@ public class DetailsActivity extends AppCompatActivity {
                     .add(R.id.details_fragment_container, fragment)
                     .commit();
         }
+    }
+
+    @Override
+    public void onTwistSelected(int twistId) {
+        Log.d("Josh", "Ignoring click");
     }
 }
