@@ -19,20 +19,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        UserDataFetcher userFetcher = new UserDataFetcher(this);
-        userFetcher.getData("/user/bsmith", new UserDataFetcher.OnUserReceivedListener() {
-            @Override
-            public void onUserReceived(User user) {
-                mUsers.add(user);
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.toString());
-            }
-
-        });
-
         // Terminate if two panes are displaying since ListActivity should be displaying both panes
         boolean isTwoPanes = getResources().getBoolean(R.bool.twoPanes);
         if (isTwoPanes) {
