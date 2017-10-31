@@ -23,6 +23,8 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TwistDatabase.get(this).getUserDetails();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
@@ -82,12 +84,12 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
-    }
+    }*/
 
     //public boolean onShowPopup(View v) {
         //PopupMenu popupMenu = new PopupMenu(this, v);
