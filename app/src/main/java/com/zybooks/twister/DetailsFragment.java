@@ -82,12 +82,12 @@ public class DetailsFragment extends Fragment {
         ArrayList<Twist> twists = mDb.getTwists();
         ArrayList<Twist> matchingTwists = new ArrayList<>();
 
-        /*for(int i = 0; i < twists.size(); i++){
+        for(int i = 0; i < twists.size(); i++){
             if(twists.get(i).getName().equals(username)){
                 matchingTwists.add(twists.get(i));
             }
-        }*/
-        DetailsFragment.TwistAdapter adapter = new DetailsFragment.TwistAdapter(/*matchingTwists*/ twists);
+        }
+        DetailsFragment.TwistAdapter adapter = new DetailsFragment.TwistAdapter(matchingTwists);
         recyclerView.setAdapter(adapter);
 
         return view;

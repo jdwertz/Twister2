@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class AddTwistActivity extends AppCompatActivity {
 
@@ -23,6 +24,6 @@ public class AddTwistActivity extends AppCompatActivity {
 
     public void onAddTwistIconClicked()
     {
-
+        Toast.makeText(this, "something", Toast.LENGTH_LONG).show();
     }
 }

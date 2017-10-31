@@ -7,13 +7,13 @@
     android:showDividers="middle">
 
     <FrameLayout
-        android:id="@+id/list_fragment_container"
+        android:id="@+id/details_fragment_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <FrameLayout
-        android:id="@+id/details_fragment_container"
+        android:id="@+id/twist_recycler_view"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3" />

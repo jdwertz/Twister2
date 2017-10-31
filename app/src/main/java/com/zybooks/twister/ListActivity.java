@@ -88,10 +88,22 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
         }
     }
 
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
+        //getMenuInflater().inflate(R.menu.popup, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        //MenuItem item = menu.findItem(R.id.addTwist);
+        //ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         return true;
     }
 
@@ -121,6 +133,8 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
                             }
                         });
                 alertDialog.show();
+
+
                 return true;
 
             default:
