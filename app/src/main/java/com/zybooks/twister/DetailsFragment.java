@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
-
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.SimpleDateFormat;
@@ -59,19 +57,23 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View view = inflater.inflate(R.layout.fragment_details, container, false);
-
-        TextView descriptionTextView = (TextView) view.findViewById(R.id.bandDescription);
         String username = mTwist.getName();
         User user = mDb.getUser(username);
+        String imageURL = "http://cs.harding.edu/fmccown/twister/images/"
+                + username + ".jpg";
 
-        Log.d("MyError", user.getAbout());
 
-        descriptionTextView.setText(user.getAbout());
+        View view = inflater.inflate(R.layout.fragment_details, container, false);
+        TextView aboutTextView = (TextView) view.findViewById(R.id.aboutUser);
+        TextView nameTextView = (TextView) view.findViewById(R.id.username);
+        ImageView profilePicture = (ImageView) view.findViewById(R.id.profilePicture);
 
-        TextView nameTextView = (TextView) view.findViewById(R.id.bandName);
+
+        new DownloadImageTask(profilePicture)
+                .execute(imageURL);
+        aboutTextView.setText(user.getAbout());
         nameTextView.setText(mTwist.getName());
+
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.details_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -80,12 +82,12 @@ public class DetailsFragment extends Fragment {
         ArrayList<Twist> twists = mDb.getTwists();
         ArrayList<Twist> matchingTwists = new ArrayList<>();
 
-        for(int i = 0; i < twists.size(); i++){
+        /*for(int i = 0; i < twists.size(); i++){
             if(twists.get(i).getName().equals(username)){
                 matchingTwists.add(twists.get(i));
             }
-        }
-        DetailsFragment.TwistAdapter adapter = new DetailsFragment.TwistAdapter(matchingTwists);
+        }*/
+        DetailsFragment.TwistAdapter adapter = new DetailsFragment.TwistAdapter(/*matchingTwists*/ twists);
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -104,7 +106,7 @@ public class DetailsFragment extends Fragment {
         public TwistHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_band, parent, false));
             itemView.setOnClickListener(this);
-            mNameTextView = (TextView) itemView.findViewById(R.id.bandName);
+            mNameTextView = (TextView) itemView.findViewById(R.id.username);
             mTwistTextView = (TextView) itemView.findViewById(R.id.genre);
             mProfilePic = (ImageView) itemView.findViewById(R.id.profilePicture);
             mTimeAgo = (TextView) itemView.findViewById(R.id.timeAgo);
