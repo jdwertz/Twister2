@@ -30,12 +30,12 @@
     </TextView>
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/genre"
+        android:id="@+id/aboutText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@id/profilePicture"
         app:layout_constraintBottom_toBottomOf="@id/profilePicture"
-
+        app:layout_constraintRight_toRightOf="parent"
         android:text="twist"
         style="@style/bandGenre"
         >
@@ -47,7 +47,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         android:text="twist"
         style="@style/bandGenre"
         >

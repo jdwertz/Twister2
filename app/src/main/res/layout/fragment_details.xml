@@ -32,12 +32,14 @@
 
         <TextView
             android:id="@+id/aboutUser"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/twistText"
             android:text="description"
             app:layout_constraintLeft_toLeftOf="@id/username"
-            app:layout_constraintTop_toBottomOf="@id/username"/>
+            app:layout_constraintTop_toBottomOf="@id/username"
+            app:layout_constraintRight_toRightOf="parent"
+            />
         </android.support.constraint.ConstraintLayout>
     </FrameLayout>
 

@@ -92,7 +92,7 @@ public class ListFragment extends Fragment {
             super(inflater.inflate(R.layout.list_item_band, parent, false));
             itemView.setOnClickListener(this);
             mNameTextView = (TextView) itemView.findViewById(R.id.username);
-            mTwistTextView = (TextView) itemView.findViewById(R.id.genre);
+            mTwistTextView = (TextView) itemView.findViewById(R.id.aboutText);
             mProfilePic = (ImageView) itemView.findViewById(R.id.profilePicture);
             mTimeAgo = (TextView) itemView.findViewById(R.id.timeAgo);
         }
