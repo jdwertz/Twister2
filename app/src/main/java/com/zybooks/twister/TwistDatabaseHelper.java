@@ -96,4 +96,12 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
         values.put(TwistTable.COL_TIME, twist.getmTimeAgo());
         return values;
     }
+
+    public ArrayList<Twist> searchTwists(String searchString){
+        ArrayList<Twist> twists = new ArrayList<>();
+        mDb.execSQL("SELECT *"  + TwistTable.TABLE + " WHERE " + TwistTable.COL_NAME +
+        " LIKE " + searchString + " OR " + TwistTable.COL_DESC + " LIKE " + searchString);
+
+        return twists;
+    }
 }

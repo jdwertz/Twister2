@@ -3,6 +3,7 @@ package com.zybooks.twister;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,8 +35,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected void onInputUsernameClicked(View view) {
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPref.edit();
+        final SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+
+
+
         boolean userNameFound = false;
        /* mTwists = mDb.getTwists();*/
        mUsername = mInputUsernameText.getText().toString();
@@ -43,7 +46,8 @@ public class LoginActivity extends AppCompatActivity {
        fetcher.getData("/user/" + mUsername, new UserDataFetcher.OnUserReceivedListener() {
            @Override
            public void onUserReceived(User user) {
-               editor.putString("username", mUsername);
+               prefEditor.putString("username", mUsername);
+               prefEditor.apply();
                Intent intent = new Intent(mContext, ListActivity.class);
                startActivity(intent);
            }

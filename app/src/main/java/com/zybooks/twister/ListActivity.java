@@ -122,6 +122,9 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
                 startActivity(intent);
                 return true;
 
+            case R.id.searchTwists:
+
+
             case R.id.About:
                 AlertDialog alertDialog = new AlertDialog.Builder(ListActivity.this).create();
                 alertDialog.setTitle("About");

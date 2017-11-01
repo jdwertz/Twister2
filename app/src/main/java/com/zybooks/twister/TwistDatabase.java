@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class TwistDatabase {
     private TwistDatabaseHelper mDbHelper;
     private Context mContext;
 
-    public interface VolleyCallback{
+    public interface VolleyCallback {
         void onSuccess();
     }
 
@@ -36,7 +37,6 @@ public class TwistDatabase {
         mUsers = new ArrayList<>();
 
 
-
         DataFetcher fetcher = new DataFetcher(context);
         fetcher.getData("/twist/", new DataFetcher.OnTwistsReceivedListener() {
             @Override
@@ -49,6 +49,7 @@ public class TwistDatabase {
                     mDbHelper.addTwist(mTwists.get(i));
                 }
             }
+
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Josh", error.toString());
@@ -56,7 +57,7 @@ public class TwistDatabase {
         });
     }
 
-    public void getUserDetails(){
+    public void getUserDetails() {
         for (int i = 0; i < mTwists.size(); i++) {
             UserDataFetcher userFetcher = new UserDataFetcher(mContext);
             userFetcher.getData("/user/" + mTwists.get(i).getName(), new UserDataFetcher.OnUserReceivedListener() {
@@ -74,7 +75,7 @@ public class TwistDatabase {
         }
     }
 
-    public void setTwists(ArrayList<Twist> twists){
+    public void setTwists(ArrayList<Twist> twists) {
         mTwists = twists;
     }
 
@@ -99,10 +100,10 @@ public class TwistDatabase {
         mDbHelper.updateTwist(band);
     }
 
-    public User getUser(String username){
+    public User getUser(String username) {
         Log.d("JoshDB", "User list:" + mUsers.size());
-        for (int i = 0; i < mUsers.size(); i++){
-            if(mUsers.get(i).getUsername().equals(username)){
+        for (int i = 0; i < mUsers.size(); i++) {
+            if (mUsers.get(i).getUsername().equals(username)) {
                 Log.d("Josh4", "Username: " + mUsers.get(i).getUsername());
                 return mUsers.get(i);
             }
@@ -110,14 +111,26 @@ public class TwistDatabase {
         return null;
     }
 
-    public void addTwist(Twist twist){
+    public void addTwist(Twist twist) {
         Log.d("Josh6", Integer.toString(mTwists.get(0).getId()));
 
         Log.d("Josh6", Integer.toString(mTwists.size() + 1));
-        //int size = mTwists.size();
-        int size = 18;
+        int size = mTwists.size();
+        size++;
+        Log.d("Josh6", twist.getName());
         twist.setId(size);
-        mTwists.add(twist);
+        ArrayList<Twist> temp = new ArrayList<>();
+        temp.add(twist);
+        temp.addAll(mTwists);
+        mTwists.clear();
+        mTwists.addAll(temp);
+
         mDbHelper.addTwist(twist);
     }
+
+    public ArrayList<Twist> search (String searchString){
+        ArrayList<Twist> matchedTwists = new ArrayList<>();
+        return matchedTwists;
+    }
+
 }
