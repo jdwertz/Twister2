@@ -14,7 +14,8 @@
         android:layout_marginTop="68dp"
         android:text="Post"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputTwistText" />
+        app:layout_constraintTop_toBottomOf="@+id/inputTwistText"
+        android:onClick="onAddTwistIconClicked"/>
 
     <EditText
         android:id="@+id/inputTwistText"

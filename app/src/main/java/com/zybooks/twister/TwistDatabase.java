@@ -109,4 +109,15 @@ public class TwistDatabase {
         }
         return null;
     }
+
+    public void addTwist(Twist twist){
+        Log.d("Josh6", Integer.toString(mTwists.get(0).getId()));
+
+        Log.d("Josh6", Integer.toString(mTwists.size() + 1));
+        //int size = mTwists.size();
+        int size = 18;
+        twist.setId(size);
+        mTwists.add(twist);
+        mDbHelper.addTwist(twist);
+    }
 }
