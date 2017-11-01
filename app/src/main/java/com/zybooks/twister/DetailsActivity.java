@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class DetailsActivity extends AppCompatActivity implements DetailsFragment.OnTwistSelectedListener {
 
-    public static String EXTRA_TWIST_ID = "twistId";
+    public static String EXTRA_TWIST_USERNAME = "twistId";
     public static ArrayList<User> mUsers;
 
     @Override
@@ -33,8 +33,8 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
 
         if (fragment == null) {
             // Use band ID from ListFragment to instantiate DetailsFragment
-            int twistId = getIntent().getIntExtra(EXTRA_TWIST_ID, 1);
-            fragment = DetailsFragment.newInstance(twistId);
+            String username = getIntent().getStringExtra(EXTRA_TWIST_USERNAME);
+            fragment = DetailsFragment.newInstance(username);
             fragmentManager.beginTransaction()
                     .add(R.id.details_fragment_container, fragment)
                     .commit();

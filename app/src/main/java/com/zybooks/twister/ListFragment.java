@@ -12,7 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.ocpsoft.prettytime.PrettyTime;
@@ -21,7 +24,7 @@ public class ListFragment extends Fragment {
 
     // For the activity to implement
     public interface OnTwistSelectedListener {
-        void onTwistSelected(int twistId);
+        void onTwistSelected(Twist twist);
     }
 
 
@@ -33,13 +36,44 @@ public class ListFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.band_recycler_view);
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.band_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
         //Send bands to recycler view
-        TwistAdapter adapter = new TwistAdapter(TwistDatabase.get(getContext()).getTwists());
-        recyclerView.setAdapter(adapter);
+        if(true) // check if network, else... look up function to add
+        {
+            TwistAdapter adapter = new TwistAdapter(TwistDatabase.get(getContext()).getTwists());
+            recyclerView.setAdapter(adapter);
+        }
+        else
+        {
+            DataFetcher fetcher = new DataFetcher(this.getContext());
+            fetcher.getData("/twist/", new DataFetcher.OnTwistsReceivedListener() {
+                @Override
+                public void onTwistsReceived(ArrayList<Twist> twists) {
+                    Log.d("Josh5", "Something");
+                    TwistDatabase db = TwistDatabase.get(getContext());
+                    TwistAdapter adapter = new TwistAdapter(twists);
+                    db.clearAllTwists();
+                    recyclerView.setAdapter(adapter);
+                    Log.d("Josh5", Integer.toString(twists.size()));
+                    for (int i = 0; i < twists.size(); i++) {
+                        Log.d("Josh5", Integer.toString(i));;
+
+                        db.addTwist(twists.get(i));
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("Josh", error.toString());
+                }
+            });
+        }
+
+
+
 
         return view;
     }
@@ -98,7 +132,7 @@ public class ListFragment extends Fragment {
             // Tell ListActivity what band was clicked
             //String whatever = mTwist.getDescription();
             Log.d("Josh", "Twist selected ID= "+ mTwist.getId());
-            mListener.onTwistSelected(mTwist.getId());
+            mListener.onTwistSelected(mTwist);
         }
     }
 
@@ -147,15 +181,6 @@ public class ListFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            // Notify activity of band selection
-            String twistId = (String) view.getTag();
-            mListener.onTwistSelected(Integer.parseInt(twistId));
-        }
-    };
 }
 
 

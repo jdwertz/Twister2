@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
            @Override
            public void onErrorResponse(VolleyError error) {
                Toast.makeText(mContext, "Account credentials invalid!", Toast.LENGTH_LONG).show();
+               Log.e("error", error.getMessage());
            }
        });
 

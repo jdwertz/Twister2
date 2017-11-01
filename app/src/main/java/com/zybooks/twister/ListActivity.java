@@ -23,13 +23,13 @@ import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity implements ListFragment.OnTwistSelectedListener {
 
-    private static String KEY_TWIST_ID = "twistId";
+    private static String KEY_TWIST_USERNAME = "username";
     private int mTwistId;
     private ArrayList<Twist> mTwists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TwistDatabase.get(this).getUserDetails();
+        //TwistDatabase.get(this).getUserDetails();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
@@ -47,14 +47,14 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
         }
 
         // Replace DetailsFragment if state saved when going from portrait to landscape
-        if (savedInstanceState != null && savedInstanceState.getInt(KEY_TWIST_ID) != 0
+      /*  if (savedInstanceState != null && savedInstanceState.getInt(KEY_TWIST_ID) != 0
                 && getResources().getBoolean(R.bool.twoPanes)) {
             mTwistId = savedInstanceState.getInt(KEY_TWIST_ID);
             Fragment twistFragment = DetailsFragment.newInstance(mTwistId);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.details_fragment_container, twistFragment)
                     .commit();
-        }
+        } */
     }
 
 
@@ -63,28 +63,28 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
         super.onSaveInstanceState(savedInstanceState);
 
         // Save state when something is selected
-        if (mTwistId != -1) {
-            savedInstanceState.putInt(KEY_TWIST_ID, mTwistId);
-        }
+        //if (mTwistId != -1) {
+        //    savedInstanceState.putString(KEY_TWIST_USERNAME, mTwistId);
+        //}
     }
 
     @Override
-    public void onTwistSelected(int twistId) {
+    public void onTwistSelected(Twist twist) {
         Log.d("Josh", "onTwistSelected (ListActivity)");
-        mTwistId = twistId;
+       // mTwistId = user;
 
         if (findViewById(R.id.details_fragment_container) == null) {
             Log.d("Josh", "?");
             // Must be in portrait, so start activity
             Intent intent = new Intent(this, DetailsActivity.class);
-            intent.putExtra(DetailsActivity.EXTRA_TWIST_ID, twistId);
+            intent.putExtra(DetailsActivity.EXTRA_TWIST_USERNAME, twist.getName());
             startActivity(intent);
-        } else {
+        } else { // to do extra credit
             // Replace previous fragment (if one exists) with a new fragment
-            Fragment twistFragment = DetailsFragment.newInstance(twistId);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.details_fragment_container, twistFragment)
-                    .commit();
+           // Fragment twistFragment = DetailsFragment.newInstance(twistId);
+           // getSupportFragmentManager().beginTransaction()
+           //         .replace(R.id.details_fragment_container, twistFragment)
+           //         .commit();
         }
     }
 

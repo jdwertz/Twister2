@@ -37,42 +37,7 @@ public class TwistDatabase {
         mUsers = new ArrayList<>();
 
 
-        DataFetcher fetcher = new DataFetcher(context);
-        fetcher.getData("/twist/", new DataFetcher.OnTwistsReceivedListener() {
-            @Override
-            public void onTwistsReceived(ArrayList<Twist> twists) {
-                Log.d("Josh5", "Something");
-                mTwists = twists;
-                Log.d("Josh5", Integer.toString(mTwists.size()));
-                for (int i = 0; i < mTwists.size(); i++) {
-                    Log.d("Josh5", Integer.toString(i));
-                    mDbHelper.addTwist(mTwists.get(i));
-                }
-            }
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Josh", error.toString());
-            }
-        });
-    }
-
-    public void getUserDetails() {
-        for (int i = 0; i < mTwists.size(); i++) {
-            UserDataFetcher userFetcher = new UserDataFetcher(mContext);
-            userFetcher.getData("/user/" + mTwists.get(i).getName(), new UserDataFetcher.OnUserReceivedListener() {
-                @Override
-                public void onUserReceived(User user) {
-                    Log.d("UserFetcher reply", "Username: " + user.getUsername() + "About:" + user.getAbout());
-                    mUsers.add(user);
-                }
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("Josh", error.toString());
-                }
-            });
-        }
     }
 
     public void setTwists(ArrayList<Twist> twists) {
@@ -80,11 +45,12 @@ public class TwistDatabase {
     }
 
     public ArrayList<Twist> getTwists() {
-        if (mTwists == null) {
-            // Call db helper to load bands
-            mTwists = mDbHelper.getTwists();
-        }
-        return mTwists;
+        return mDbHelper.getTwists();
+    }
+
+    public void clearAllTwists()
+    {
+        mDbHelper.clearAllTwists();
     }
 
     public Twist getTwist(int twistId) {
@@ -96,26 +62,11 @@ public class TwistDatabase {
         return null;
     }
 
-    public void updateTwist(Twist band) {
-        mDbHelper.updateTwist(band);
-    }
-
-    public User getUser(String username) {
-        Log.d("JoshDB", "User list:" + mUsers.size());
-        for (int i = 0; i < mUsers.size(); i++) {
-            if (mUsers.get(i).getUsername().equals(username)) {
-                Log.d("Josh4", "Username: " + mUsers.get(i).getUsername());
-                return mUsers.get(i);
-            }
-        }
-        return null;
-    }
-
     public void addTwist(Twist twist) {
-        Log.d("Josh6", Integer.toString(mTwists.get(0).getId()));
+       // Log.d("Josh6", Integer.toString(mTwists.get(0).getId()));
 
-        Log.d("Josh6", Integer.toString(mTwists.size() + 1));
-        int size = mTwists.size();
+      //  Log.d("Josh6", Integer.toString(mTwists.size() + 1));
+       /* int size = mTwists.size();
         size++;
         Log.d("Josh6", twist.getName());
         twist.setId(size);
@@ -123,7 +74,7 @@ public class TwistDatabase {
         temp.add(twist);
         temp.addAll(mTwists);
         mTwists.clear();
-        mTwists.addAll(temp);
+        mTwists.addAll(temp); */
 
         mDbHelper.addTwist(twist);
     }

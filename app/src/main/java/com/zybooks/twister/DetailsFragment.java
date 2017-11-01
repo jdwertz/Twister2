@@ -1,6 +1,7 @@
 package com.zybooks.twister;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.VolleyError;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -21,6 +25,8 @@ import java.util.List;
 
 public class DetailsFragment extends Fragment {
 
+    private String mUsername;
+
     public interface OnTwistSelectedListener {
         void onTwistSelected(int twistId);
     }
@@ -30,10 +36,10 @@ public class DetailsFragment extends Fragment {
     // Reference to the activity
     private DetailsFragment.OnTwistSelectedListener mListener;
 
-    public static DetailsFragment newInstance(int bandId) {
+    public static DetailsFragment newInstance(String username) {
         DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
-        args.putInt("twistId", bandId);
+        args.putString("username", username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,51 +50,80 @@ public class DetailsFragment extends Fragment {
         mDb = TwistDatabase.get(getContext());
 
         // Get the band ID from the intent that started DetailsActivity
-        int twistId = 1;
+        String username;
         if (getArguments() != null) {
-            twistId = getArguments().getInt("twistId");
-            Log.d("twistID", Integer.toString(twistId));
+            mUsername = getArguments().getString("username");
+            Log.d("username", mUsername);
         }
-        Log.d("Josh", "twistId" + twistId);
-        mTwist = mDb.getTwist(twistId);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        String username = mTwist.getName();
-        User user = mDb.getUser(username);
+
         String imageURL = "http://cs.harding.edu/fmccown/twister/images/"
-                + username + ".jpg";
+                + mUsername + ".jpg";
 
 
         View view = inflater.inflate(R.layout.fragment_details, container, false);
-        TextView aboutTextView = (TextView) view.findViewById(R.id.aboutUser);
-        TextView nameTextView = (TextView) view.findViewById(R.id.username);
+        final TextView aboutTextView = (TextView) view.findViewById(R.id.aboutUser);
+        final TextView nameTextView = (TextView) view.findViewById(R.id.username);
         ImageView profilePicture = (ImageView) view.findViewById(R.id.profilePicture);
 
 
         new DownloadImageTask(profilePicture)
                 .execute(imageURL);
-        aboutTextView.setText(user.getAbout());
-        nameTextView.setText(mTwist.getName());
+        // To do... get information from userDataFetcher
 
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.details_recycler_view);
+        UserDataFetcher fetcher = new UserDataFetcher(this.getContext());
+        fetcher.getData("/user/" + mUsername, new UserDataFetcher.OnUserReceivedListener() {
+            @Override
+            public void onUserReceived(User user) {
+                aboutTextView.setText(user.getAbout());
+                nameTextView.setText(user.getUsername());
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(DetailsFragment.this.getContext(), "Problem getting username!", Toast.LENGTH_LONG).show();
+                Log.e("error", error.getMessage());
+            }
+        });
+        
+        
+
+
+
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.details_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //Send bands to recycler view
         ArrayList<Twist> twists = mDb.getTwists();
         ArrayList<Twist> matchingTwists = new ArrayList<>();
 
-        for(int i = 0; i < twists.size(); i++){
+        /*for(int i = 0; i < twists.size(); i++){
             if(twists.get(i).getName().equals(username)){
                 matchingTwists.add(twists.get(i));
             }
-        }
-        DetailsFragment.TwistAdapter adapter = new DetailsFragment.TwistAdapter(matchingTwists);
-        recyclerView.setAdapter(adapter);
+        }*/
+
+        DataFetcher dataFetcher = new DataFetcher(this.getContext());
+        dataFetcher.getData("/twist/" + mUsername, new DataFetcher.OnTwistsReceivedListener() {
+            @Override
+            public void onTwistsReceived(ArrayList<Twist> twists) {
+                DetailsFragment.TwistAdapter adapter = new DetailsFragment.TwistAdapter(twists);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Josh", error.toString());
+            }
+        });
+
+
 
         return view;
     }
