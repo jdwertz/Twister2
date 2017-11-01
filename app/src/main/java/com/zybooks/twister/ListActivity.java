@@ -1,23 +1,15 @@
 package com.zybooks.twister;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -123,6 +115,9 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
                 return true;
 
             case R.id.searchTwists:
+                intent = new Intent (this, SearchActivity.class);
+                startActivity(intent);
+                return true;
 
 
             case R.id.About:

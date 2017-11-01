@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:appcompat="http://schemas.android.com/tools">
     <item
         android:id="@+id/addTwist"
         android:title="Add twist"
@@ -8,10 +9,11 @@
         app:showAsAction="always" />
 
     <item
-    android:id="@+id/searchTwists"
-    android:title="Search twists"
-    android:icon="@drawable/search_twists"
-    app:showAsAction="always" />
+        android:id="@+id/searchTwists"
+        android:title="Search twists"
+        android:icon="@drawable/search_twists"
+        app:showAsAction="always"
+        />
 
     <item
         android:id="@+id/Logout"

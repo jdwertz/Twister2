@@ -35,9 +35,6 @@ public class TwistDatabase {
         mContext = context;
         mDbHelper = new TwistDatabaseHelper(context, mTwists);
         mUsers = new ArrayList<>();
-
-
-
     }
 
     public void setTwists(ArrayList<Twist> twists) {
@@ -45,6 +42,7 @@ public class TwistDatabase {
     }
 
     public ArrayList<Twist> getTwists() {
+
         return mDbHelper.getTwists();
     }
 
@@ -80,8 +78,15 @@ public class TwistDatabase {
     }
 
     public ArrayList<Twist> search (String searchString){
-        ArrayList<Twist> matchedTwists = new ArrayList<>();
-        return matchedTwists;
+        /*Twist twist = new Twist();
+        twist.setId(20);
+        twist.setmTimeAgo("4");
+        twist.setName("Josh");
+        twist.setDescription("this is something");
+        ArrayList<Twist> list = new ArrayList<>();
+        list.add(twist);
+        return list;*/
+        return mDbHelper.getWordMatches(searchString);
     }
 
 }

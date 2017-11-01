@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -101,4 +103,46 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
 
         return twists;
     }
+
+    public ArrayList<Twist> getWordMatches(String searchString){
+        ArrayList<Twist> twists = new ArrayList<>();
+
+        String query = "select * from " + TwistTable.TABLE +  " Where " + TwistTable.COL_DESC + " Like '%" + searchString +"%'";
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            // Loop through all twists
+            do {
+                Twist twist = new Twist();
+                twist.setId(cursor.getInt(0));
+                twist.setName(cursor.getString(1));
+                twist.setDescription(cursor.getString(2));
+                twist.setmTimeAgo(cursor.getString(3));
+                //twist.setRating(cursor.getFloat(3));
+                twists.add(twist);
+            } while (cursor.moveToNext());
+        }
+
+        query = "select * from " + TwistTable.TABLE +  " Where " + TwistTable.COL_NAME + " Like '%" + searchString +"%'";
+
+
+        cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            // Loop through all twists
+            do {
+                Twist twist = new Twist();
+                twist.setId(cursor.getInt(0));
+                twist.setName(cursor.getString(1));
+                twist.setDescription(cursor.getString(2));
+                twist.setmTimeAgo(cursor.getString(3));
+                //twist.setRating(cursor.getFloat(3));
+                twists.add(twist);
+            } while (cursor.moveToNext());
+        }
+
+        return twists;
+    }
+
 }

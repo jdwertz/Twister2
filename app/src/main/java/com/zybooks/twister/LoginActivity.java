@@ -54,23 +54,10 @@ public class LoginActivity extends AppCompatActivity {
 
            @Override
            public void onErrorResponse(VolleyError error) {
+               Log.d("test", error.toString());
                Toast.makeText(mContext, "Account credentials invalid!", Toast.LENGTH_LONG).show();
-               Log.e("error", error.getMessage());
            }
        });
 
-        /*if (mTwists.size() == 0){
-            Toast.makeText(this, "No response from API yet", Toast.LENGTH_LONG).show();
-        }
-        else {
-            Log.d("username", mUsername);
-            for (int i = 0; i < mTwists.size() && !userNameFound; i++) {
-                if (mUsername.equals(mTwists.get(i).getName())) {
-                    userNameFound = true;
-                    Intent intent = new Intent(this, ListActivity.class);
-                    startActivity(intent);
-                }
-            }
-        }*/
     }
 }
