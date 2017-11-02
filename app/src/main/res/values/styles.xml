@@ -13,7 +13,7 @@
         <item name="android:padding">@dimen/list_padding</item>
     </style>
 
-    <style name="bandGenre">
+    <style name="textStyle">
         <item name="android:textSize">10sp</item>
         <item name="android:paddingLeft">@dimen/list_padding</item>
     </style>
