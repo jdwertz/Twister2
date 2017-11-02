@@ -3,6 +3,7 @@ package com.zybooks.twister;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -46,6 +47,11 @@ public class AddTwistActivity extends AppCompatActivity {
         mEditTwist = (EditText) findViewById(R.id.inputTwistText);
         mEditTwist.addTextChangedListener(mTextEditorWatcher);
         mCharCount = (TextView) findViewById(R.id.twistCharCountView);
+
+        // Display "UP" button
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void onAddTwistIconClicked(View view)

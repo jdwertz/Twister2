@@ -1,6 +1,7 @@
 package com.zybooks.twister;
 
 import android.content.Context;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +37,10 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         mSearchText = (EditText) findViewById(R.id.inputSearchText);
         mContext = this;
+
+        // Display "UP" button
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     public void onSearchClicked(View view){

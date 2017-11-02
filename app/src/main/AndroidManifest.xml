@@ -28,9 +28,12 @@
         <activity android:name=".ListActivity" />
         <activity
             android:name=".AddTwistActivity"
-            android:label="Post Twist" />
-        <activity android:name=".DetailsActivity" />
-        <activity android:name=".SearchActivity"></activity>
+            android:label="Post Twist"
+            android:parentActivityName=".ListActivity" />
+        <activity android:name=".DetailsActivity"
+            android:parentActivityName=".ListActivity"/>
+        <activity android:name=".SearchActivity"
+            android:parentActivityName=".ListActivity"/>
     </application>
 
 </manifest>
