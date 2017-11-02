@@ -1,6 +1,5 @@
 package com.zybooks.twister;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -12,11 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 public class AddTwistActivity extends AppCompatActivity {
 
@@ -45,23 +40,18 @@ public class AddTwistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_twist);
 
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         mUsername = prefs.getString("username", "noName");
 
         mEditTwist = (EditText) findViewById(R.id.inputTwistText);
         mEditTwist.addTextChangedListener(mTextEditorWatcher);
         mCharCount = (TextView) findViewById(R.id.twistCharCountView);
-
-        Log.d("twistUsername", "username =" + mUsername);
     }
-
 
     public void onAddTwistIconClicked(View view)
     {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format.format(new java.util.Date());
-        Log.d("Josh5", "Time: " + time);
         Twist twist = new Twist();
         twist.setName(mUsername);
         twist.setDescription(mEditTwist.getText().toString());

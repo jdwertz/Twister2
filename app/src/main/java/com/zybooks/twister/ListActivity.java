@@ -15,18 +15,10 @@ import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity implements ListFragment.OnTwistSelectedListener {
 
-    private static String KEY_TWIST_USERNAME = "username";
-    private int mTwistId;
-    private ArrayList<Twist> mTwists;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //TwistDatabase.get(this).getUserDetails();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-
-        mTwistId = -1;
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.list_fragment_container);
@@ -37,73 +29,41 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
                     .add(R.id.list_fragment_container, fragment)
                     .commit();
         }
-
-        // Replace DetailsFragment if state saved when going from portrait to landscape
-      /*  if (savedInstanceState != null && savedInstanceState.getInt(KEY_TWIST_ID) != 0
-                && getResources().getBoolean(R.bool.twoPanes)) {
-            mTwistId = savedInstanceState.getInt(KEY_TWIST_ID);
-            Fragment twistFragment = DetailsFragment.newInstance(mTwistId);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.details_fragment_container, twistFragment)
-                    .commit();
-        } */
     }
 
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-
-        // Save state when something is selected
-        //if (mTwistId != -1) {
-        //    savedInstanceState.putString(KEY_TWIST_USERNAME, mTwistId);
-        //}
     }
 
     @Override
     public void onTwistSelected(Twist twist) {
-        Log.d("Josh", "onTwistSelected (ListActivity)");
-       // mTwistId = user;
 
         if (findViewById(R.id.details_fragment_container) == null) {
-            Log.d("Josh", "?");
             // Must be in portrait, so start activity
             Intent intent = new Intent(this, DetailsActivity.class);
             intent.putExtra(DetailsActivity.EXTRA_TWIST_USERNAME, twist.getName());
             startActivity(intent);
-        } else { // to do extra credit
+        } else {
+            // To do for extra credit...
             // Replace previous fragment (if one exists) with a new fragment
-           // Fragment twistFragment = DetailsFragment.newInstance(twistId);
-           // getSupportFragmentManager().beginTransaction()
-           //         .replace(R.id.details_fragment_container, twistFragment)
-           //         .commit();
+            // Fragment twistFragment = DetailsFragment.newInstance(twistId);
+            // getSupportFragmentManager().beginTransaction()
+            //         .replace(R.id.details_fragment_container, twistFragment)
+            //         .commit();
         }
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }*/
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
-        //getMenuInflater().inflate(R.menu.popup, menu);
-
-        // Locate MenuItem with ShareActionProvider
-        //MenuItem item = menu.findItem(R.id.addTwist);
-        //ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
-            // User chose action_settings
             case R.id.addTwist:
                 Intent intent = new Intent(this, AddTwistActivity.class);
                 startActivity(intent);
@@ -119,7 +79,6 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
                 startActivity(intent);
                 return true;
 
-
             case R.id.About:
                 AlertDialog alertDialog = new AlertDialog.Builder(ListActivity.this).create();
                 alertDialog.setTitle("About");
@@ -131,7 +90,6 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnTw
                             }
                         });
                 alertDialog.show();
-
 
                 return true;
 

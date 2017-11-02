@@ -37,10 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onInputUsernameClicked(View view) {
         final SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(this).edit();
 
-
-
-        boolean userNameFound = false;
-       /* mTwists = mDb.getTwists();*/
        mUsername = mInputUsernameText.getText().toString();
        UserDataFetcher fetcher = new UserDataFetcher(mContext);
        fetcher.getData("/user/" + mUsername, new UserDataFetcher.OnUserReceivedListener() {
@@ -54,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
            @Override
            public void onErrorResponse(VolleyError error) {
-               Log.d("test", error.toString());
+               Log.d("onErrorResponse", error.toString());
                Toast.makeText(mContext, "Account credentials invalid!", Toast.LENGTH_LONG).show();
            }
        });

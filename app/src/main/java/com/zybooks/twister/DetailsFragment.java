@@ -12,11 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.VolleyError;
-
 import org.ocpsoft.prettytime.PrettyTime;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +27,6 @@ public class DetailsFragment extends Fragment {
         void onTwistSelected(int twistId);
     }
 
-    private Twist mTwist;
     private TwistDatabase mDb;
     // Reference to the activity
     private DetailsFragment.OnTwistSelectedListener mListener;
@@ -48,7 +44,6 @@ public class DetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mDb = TwistDatabase.get(getContext());
 
-        // Get the band ID from the intent that started DetailsActivity
         String username;
         if (getArguments() != null) {
             mUsername = getArguments().getString("username");
@@ -59,22 +54,15 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         String imageURL = "http://cs.harding.edu/fmccown/twister/images/"
                 + mUsername + ".jpg";
-
-
         View view = inflater.inflate(R.layout.fragment_details, container, false);
         final TextView aboutTextView = (TextView) view.findViewById(R.id.aboutUser);
         final TextView nameTextView = (TextView) view.findViewById(R.id.username);
         ImageView profilePicture = (ImageView) view.findViewById(R.id.profilePicture);
-
-
         new DownloadImageTask(profilePicture)
                 .execute(imageURL);
-        // To do... get information from userDataFetcher
-
 
         UserDataFetcher fetcher = new UserDataFetcher(this.getContext());
         fetcher.getData("/user/" + mUsername, new UserDataFetcher.OnUserReceivedListener() {
@@ -90,23 +78,9 @@ public class DetailsFragment extends Fragment {
                 Log.e("error", error.getMessage());
             }
         });
-        
-        
-
-
 
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.details_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        //Send bands to recycler view
-        ArrayList<Twist> twists = mDb.getTwists();
-        ArrayList<Twist> matchingTwists = new ArrayList<>();
-
-        /*for(int i = 0; i < twists.size(); i++){
-            if(twists.get(i).getName().equals(username)){
-                matchingTwists.add(twists.get(i));
-            }
-        }*/
 
         DataFetcher dataFetcher = new DataFetcher(this.getContext());
         dataFetcher.getData("/twist/" + mUsername, new DataFetcher.OnTwistsReceivedListener() {
@@ -122,8 +96,6 @@ public class DetailsFragment extends Fragment {
             }
         });
 
-
-
         return view;
     }
 
@@ -131,7 +103,6 @@ public class DetailsFragment extends Fragment {
             implements View.OnClickListener {
 
         private Twist mTwist;
-
         private TextView mNameTextView;
         private TextView mTwistTextView;
         private ImageView mProfilePic;
@@ -169,16 +140,10 @@ public class DetailsFragment extends Fragment {
                     + mTwist.getName() + ".jpg";
             new DownloadImageTask(mProfilePic)
                     .execute(imageURL);
-
-            Log.d("Josh", "End of bind(Twist)");
         }
 
         @Override
         public void onClick(View view) {
-            Log.d("Josh", "onClick");
-            // Tell ListActivity what band was clicked
-            //String whatever = mTwist.getDescription();
-            Log.d("Josh", "Twist selected ID= " + mTwist.getId());
             mListener.onTwistSelected(mTwist.getId());
         }
     }
@@ -200,9 +165,6 @@ public class DetailsFragment extends Fragment {
         @Override
         public void onBindViewHolder(DetailsFragment.TwistHolder holder, int position) {
             Twist twist = mTwists.get(position);
-
-            Log.d("Josh", "ID: " + Integer.toString(twist.getId()));
-
             holder.bind(twist);
         }
 

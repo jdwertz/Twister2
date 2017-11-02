@@ -2,7 +2,6 @@ package com.zybooks.twister;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -10,17 +9,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- * Created by Josh on 10/24/2017.
- */
 
 public class DataFetcher {
 
@@ -47,7 +40,6 @@ public class DataFetcher {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Log.d("Josh", "Log");
                             JSONArray jsonTwistArray = response.getJSONArray("twists");
                             ArrayList<Twist> twists = new ArrayList<>();
                             for (int i = 0; i < jsonTwistArray.length(); i++){
@@ -58,7 +50,6 @@ public class DataFetcher {
                                 twist.setDescription(jsonTwist.getString("message"));
                                 twist.setmTimeAgo(jsonTwist.getString("timestamp"));
                                 twists.add(twist);
-                                Log.d("Josh", "Username:" + jsonTwist.getString("username"));
                             }
                             listener.onTwistsReceived(twists);
                         }
@@ -70,7 +61,6 @@ public class DataFetcher {
             @Override
             public void onErrorResponse(VolleyError error) {
                 listener.onErrorResponse(error);
-                Log.d("Josh", error.toString());
             }
         })
         {
@@ -80,13 +70,11 @@ public class DataFetcher {
                 params.put("Content-Type", "application/json");
                 params.put("JsonStub-User-Key", "edbc267a-f880-4dec-8dec-727cccc27e5d");
                 params.put("JsonStub-Project-Key", "40e26003-fc1b-40f3-9ae4-bfab71e6d186");
-                Log.d("Josh", "Headers added");
                 return params;
             }
         };
 
         // Add the request to the RequestQueue
         queue.add(jsonRequest);
-        Log.d("Josh", "Request added to queue");
     }
 }

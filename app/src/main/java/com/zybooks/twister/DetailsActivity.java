@@ -6,25 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.android.volley.VolleyError;
-
-import java.util.ArrayList;
-
 public class DetailsActivity extends AppCompatActivity implements DetailsFragment.OnTwistSelectedListener {
 
     public static String EXTRA_TWIST_USERNAME = "twistId";
-    public static ArrayList<User> mUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Terminate if two panes are displaying since ListActivity should be displaying both panes
-        boolean isTwoPanes = getResources().getBoolean(R.bool.twoPanes);
-        if (isTwoPanes) {
-            finish();
-            return;
-        }
+        //boolean isTwoPanes = getResources().getBoolean(R.bool.twoPanes);
+        //if (isTwoPanes) {
+        //    finish();
+        //    return;
+        //}
 
         setContentView(R.layout.activity_details);
 
@@ -43,6 +38,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
 
     @Override
     public void onTwistSelected(int twistId) {
-        Log.d("Josh", "Ignoring click");
+        Log.d("onTwistSelected", "Ignoring click");
     }
 }

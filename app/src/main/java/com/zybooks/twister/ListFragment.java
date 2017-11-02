@@ -13,9 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android.volley.VolleyError;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +26,6 @@ public class ListFragment extends Fragment {
     public interface OnTwistSelectedListener {
         void onTwistSelected(Twist twist);
     }
-
 
     // Reference to the activity
     private OnTwistSelectedListener mListener;
@@ -47,8 +44,7 @@ public class ListFragment extends Fragment {
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
 
-        //Send bands to recycler view
-        if(isConnected == false) // check if network, else... look up function to add
+        if(isConnected == false) // Check if network connectivity active...
         {
             TwistAdapter adapter = new TwistAdapter(TwistDatabase.get(getContext()).getTwists());
             recyclerView.setAdapter(adapter);
@@ -59,21 +55,18 @@ public class ListFragment extends Fragment {
             fetcher.getData("/twist/", new DataFetcher.OnTwistsReceivedListener() {
                 @Override
                 public void onTwistsReceived(ArrayList<Twist> twists) {
-                    Log.d("Josh5", "Something");
                     TwistDatabase db = TwistDatabase.get(getContext());
                     TwistAdapter adapter = new TwistAdapter(twists);
                     db.clearAllTwists();
                     recyclerView.setAdapter(adapter);
-                    Log.d("Josh5", Integer.toString(twists.size()));
                     for (int i = 0; i < twists.size(); i++) {
-                        Log.d("Josh5", Integer.toString(i));;
                         db.addTwist(twists.get(i));
                     }
                 }
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.d("Josh", error.toString());
+                    Log.d("onErrorResponse", error.toString());
                 }
             });
         }
@@ -88,7 +81,6 @@ public class ListFragment extends Fragment {
             implements View.OnClickListener {
 
         private Twist mTwist;
-
         private TextView mNameTextView;
         private TextView mTwistTextView;
         private ImageView mProfilePic;
@@ -128,16 +120,10 @@ public class ListFragment extends Fragment {
                     + mTwist.getName() + ".jpg";
             new DownloadImageTask(mProfilePic)
                     .execute(imageURL);
-
-            Log.d("Josh", "End of bind(Twist)");
         }
 
         @Override
         public void onClick(View view) {
-            Log.d("Josh", "onClick");
-            // Tell ListActivity what band was clicked
-            //String whatever = mTwist.getDescription();
-            Log.d("Josh", "Twist selected ID= "+ mTwist.getId());
             mListener.onTwistSelected(mTwist);
         }
     }
@@ -160,8 +146,6 @@ public class ListFragment extends Fragment {
         public void onBindViewHolder(TwistHolder holder, int position) {
             Twist twist = mTwists.get(position);
 
-            Log.d("Josh", "ID: " + Integer.toString(twist.getId()));
-
             holder.bind(twist);
         }
 
@@ -170,7 +154,7 @@ public class ListFragment extends Fragment {
             return mTwists.size();
         }
     }
-    //OnAttach
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

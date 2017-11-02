@@ -2,7 +2,6 @@ package com.zybooks.twister;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -10,17 +9,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- * Created by Josh on 10/24/2017.
- */
 
 public class UserDataFetcher {
 
@@ -40,7 +31,6 @@ public class UserDataFetcher {
         RequestQueue queue = Volley.newRequestQueue(mContext);
         String url = "http://jsonstub.com" + HttpExtension;
 
-
         // Request a string response from the provided URL
         final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url,
                 null,
@@ -48,12 +38,10 @@ public class UserDataFetcher {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Log.d("Josh", "Log");
                             //JSONArray jsonTwisArray = response.getJSONArray("twists");
                             User user = new User();
                             user.setUsername(response.getString("username"));
                             user.setAbout(response.getString("about"));
-                            Log.d("Josh", "About:" + user.getAbout());
                             listener.onUserReceived(user);
                         }
                         catch (Exception ex) {
@@ -64,7 +52,7 @@ public class UserDataFetcher {
             @Override
             public void onErrorResponse(VolleyError error) {
                 listener.onErrorResponse(error);
-                Log.d("Josh", error.toString());
+                Log.d("onErrorResponse", error.toString());
             }
         })
         {
@@ -81,6 +69,6 @@ public class UserDataFetcher {
 
         // Add the request to the RequestQueue
         queue.add(jsonRequest);
-        Log.d("Josh", "Request added to queue");
+        Log.d("jsonRequest", "Request added to queue");
     }
 }

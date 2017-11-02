@@ -5,9 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -39,7 +37,6 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        Log.d("Josh2", "Is on create being called?");
         mDb = sqLiteDatabase;
         mDb.execSQL("create table " + TwistTable.TABLE +
                 " (id integer PRIMARY KEY AUTOINCREMENT, " +
@@ -53,7 +50,6 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void addTwist(Twist twist) {
-        // Insert the twist into bands table
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TwistTable.COL_NAME, twist.getName());
@@ -127,7 +123,6 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
 
         query = "select * from " + TwistTable.TABLE +  " Where " + TwistTable.COL_NAME + " Like '%" + searchString +"%'";
 
-
         cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             // Loop through all twists
@@ -141,8 +136,6 @@ public class TwistDatabaseHelper extends SQLiteOpenHelper {
                 twists.add(twist);
             } while (cursor.moveToNext());
         }
-
         return twists;
     }
-
 }

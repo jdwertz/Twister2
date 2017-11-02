@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import org.ocpsoft.prettytime.PrettyTime;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,10 +25,8 @@ public class SearchActivity extends AppCompatActivity {
         void onTwistSelected(Twist twist);
     }
 
-
     // Reference to the activity
     private OnTwistSelectedListener mListener;
-
     private EditText mSearchText;
     private Context mContext;
 
@@ -40,8 +36,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         mSearchText = (EditText) findViewById(R.id.inputSearchText);
         mContext = this;
-
-
     }
 
     public void onSearchClicked(View view){
@@ -54,19 +48,12 @@ public class SearchActivity extends AppCompatActivity {
 
         TwistAdapter adapter = new TwistAdapter(twists);
         recyclerView.setAdapter(adapter);
-
     }
-
-
-
-
-
 
     private class TwistHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         private Twist mTwist;
-
         private TextView mNameTextView;
         private TextView mTwistTextView;
         private ImageView mProfilePic;
@@ -106,16 +93,10 @@ public class SearchActivity extends AppCompatActivity {
                     + mTwist.getName() + ".jpg";
             new DownloadImageTask(mProfilePic)
                     .execute(imageURL);
-
-            Log.d("Josh", "End of bind(Twist)");
         }
 
         @Override
         public void onClick(View view) {
-            Log.d("Josh", "onClick");
-            // Tell ListActivity what band was clicked
-            //String whatever = mTwist.getDescription();
-            Log.d("Josh", "Twist selected ID= "+ mTwist.getId());
             mListener.onTwistSelected(mTwist);
         }
     }
@@ -137,9 +118,6 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(TwistHolder holder, int position) {
             Twist twist = mTwists.get(position);
-
-            Log.d("Josh", "ID: " + Integer.toString(twist.getId()));
-
             holder.bind(twist);
         }
 
@@ -149,21 +127,18 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    //public void onAttach(Context context) {
+    //    onAttach(context);
+    //    if (context instanceof SearchActivity.OnTwistSelectedListener) {
+    //        mListener = (SearchActivity.OnTwistSelectedListener) context;
+    //    } else {
+    //        throw new RuntimeException(context.toString()
+    //                + " must implement OnTwistSelectedListener");
+    //    }
+    //}
 
-
-    public void onAttach(Context context) {
-        onAttach(context);
-        if (context instanceof SearchActivity.OnTwistSelectedListener) {
-            mListener = (SearchActivity.OnTwistSelectedListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnTwistSelectedListener");
-        }
-    }
-
-
-    public void onDetach() {
-        onDetach();
-        mListener = null;
-    }
+    //public void onDetach() {
+    //    onDetach();
+    //    mListener = null;
+    //}
 }
