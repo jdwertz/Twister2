@@ -9,16 +9,19 @@ Authors:
 * Trevor Hale
 * Joshua Wertz
 
-Known bugs: ---
+Known bugs: None
 
-Extra Credit: ---
+Extra Credit: None
 
 Contributions:
-* Trevor Hale (--%):
-  -
-  -
-  -
-* Joshua Wertz (--%):
-  - 
-  -
-  -
+* Trevor Hale (50%):
+  - Add a twist
+  - Logout
+  - About
+  - UI 
+  - PrettyTime
+* Joshua Wertz (50%):
+  - Details screen
+  - Architecture, app core logic
+  - Handled Twister Web API
+  - Search
