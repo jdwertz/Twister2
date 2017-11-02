@@ -170,7 +170,7 @@ public class ListFragment extends Fragment {
             return mTwists.size();
         }
     }
-
+    //OnAttach
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
