@@ -70,10 +70,6 @@ public class ListFragment extends Fragment {
                 }
             });
         }
-
-
-
-
         return view;
     }
 
@@ -145,7 +141,6 @@ public class ListFragment extends Fragment {
         @Override
         public void onBindViewHolder(TwistHolder holder, int position) {
             Twist twist = mTwists.get(position);
-
             holder.bind(twist);
         }
 

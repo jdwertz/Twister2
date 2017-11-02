@@ -18,9 +18,9 @@ Contributions:
   - Add a twist
   - Logout
   - About
-  - UI 
-  - PrettyTime
+  - UI (App logo, action bar icons, UP button, layout, PrettyTime format)
 * Joshua Wertz (50%):
+  - List screen
   - Details screen
   - Architecture, app core logic
   - Handled Twister Web API
