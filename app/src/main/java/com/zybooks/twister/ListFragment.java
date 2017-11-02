@@ -171,7 +171,7 @@ public class ListFragment extends Fragment {
         }
     }
 
-    /*@Override
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnTwistSelectedListener) {
@@ -180,13 +180,13 @@ public class ListFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnTwistSelectedListener");
         }
-    }*/
+    }
 
-    /*@Override
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }*/
+    }
 }
 
 
